@@ -43,15 +43,19 @@ public partial class SteamContext : DbContext
 
     public override void Dispose()
     {
+        // освобождаем неуправляемые ресурсы (подключения к файлам, базам данных, сетевые подключения и т.д.)
         base.Dispose();
         logStream.Dispose();
+        // подавляем финализацию
         GC.SuppressFinalize(this);
     }
 
     public override async ValueTask DisposeAsync()
     {
+        // освобождаем неуправляемые ресурсы
         await base.DisposeAsync();
         await logStream.DisposeAsync();
+        // подавляем финализацию
         GC.SuppressFinalize(this);
     }
 
