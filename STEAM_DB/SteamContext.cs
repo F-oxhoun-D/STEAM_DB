@@ -41,6 +41,20 @@ public partial class SteamContext : DbContext
         optionsBuilder.LogTo(logStream.WriteLine, LogLevel.Information);
     }
 
+    public override void Dispose()
+    {
+        base.Dispose();
+        logStream.Dispose();
+        GC.SuppressFinalize(this);
+    }
+
+    public override async ValueTask DisposeAsync()
+    {
+        await base.DisposeAsync();
+        await logStream.DisposeAsync();
+        GC.SuppressFinalize(this);
+    }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Developer>(entity =>
