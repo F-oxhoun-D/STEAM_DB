@@ -9,7 +9,7 @@
         Title="STEAM" Height="550" Width="1000" WindowStartupLocation="CenterScreen" Background="#FF14141F" BorderBrush="#FF14141F" Foreground="#FF14141F" WindowStyle="ThreeDBorderWindow" ResizeMode="CanMinimize" Icon="/steam_icon_188906.ico">
     <Window.Resources>
         <Style TargetType="DataGridColumnHeader">
-            <Setter Property="Background" Value="#FF444444"/>
+            <Setter Property="Background" Value="#FF655555"/>
             <Setter Property="Height" Value="30"/>
         </Style>
     </Window.Resources>
@@ -26,10 +26,10 @@
                         <Label Content="STEAM" Foreground="White" FontSize="24" Margin="108,16,172,45"/>
                     </Grid>
                 </Border>
-                <Menu Grid.Row="0" Background="#FF14141F" Height="100" Width="700" Margin="300,0,0,0">
+                <Menu Grid.Row="0" Background="#FF14141F" Height="100" Width="700" VerticalAlignment="Top" HorizontalAlignment="Right">
                     <Button Name="gameButton" Style="{StaticResource MaterialDesignFlatLightBgButton}" Content="Игры" FontSize="24" Height="70" Width="182" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" Click="GameButton_Click"/>
-                    <Button Name="signInButton" Style="{StaticResource MaterialDesignFlatLightBgButton}" Content="Вход" FontSize="24" Height="70" Width="182" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}"/>
-                    <Button Name="signIpButton" Style="{StaticResource MaterialDesignFlatLightBgButton}" Content="Регистрация" FontSize="24" Height="70" Width="182" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}"/>
+                    <Button Name="signInButton" Style="{StaticResource MaterialDesignFlatLightBgButton}" Content="Вход" FontSize="24" Height="70" Width="182" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" VerticalAlignment="Top"/>
+                    <Button Name="signUpButton" Style="{StaticResource MaterialDesignFlatLightBgButton}" Content="Регистрация" FontSize="24" Height="70" Width="182" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" Click="SignUpButton_Click"/>
                 </Menu>
                 <DataGrid x:Name="gamesGrid" AutoGenerateColumns="True" Grid.Row="1" Background="{x:Null}" Foreground="White" IsReadOnly="True">
                 </DataGrid>

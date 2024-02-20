@@ -29,5 +29,11 @@ namespace STEAM_DB
             // в gamesGrid выводим список игр
             gamesGrid.ItemsSource = ProcessRequest.GetListOfGames();
         }
+
+        private void SignUpButton_Click(object sender, RoutedEventArgs e)
+        {
+            SignUpWindow signUpWindow = new ();
+            signUpWindow.ShowDialog();
+        }
     }
 }

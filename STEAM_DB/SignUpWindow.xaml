@@ -1,0 +1,16 @@
+﻿<Window x:Class="STEAM_DB.SignUpWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:STEAM_DB"
+        mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Title="STEAM" Height="468" Width="734" Icon="/steam_icon_188906.ico" WindowStartupLocation="CenterScreen" Background="#FF1D1D2D" BorderBrush="#FF1D1D2D" ResizeMode="CanMinimize">
+    <Grid>
+        <TextBox Name="textBoxUserName" materialDesign:HintAssist.Hint="Никнейм" materialDesign:HintAssist.Foreground="#FF655555" Style="{StaticResource MaterialDesignOutlinedTextBox}" FontSize="15" Background="#FF655555" BorderBrush="Black" Foreground="White"  Height="64" Width="350" SelectionTextBrush="#FF655555" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,24,0,0" CaretBrush="#FF6D5DE0" SelectionBrush="#FF4B50FC"/>
+        <TextBox Name="textBoxEmail" materialDesign:HintAssist.Hint="Почта" materialDesign:HintAssist.Foreground="#FF655555" Style="{StaticResource MaterialDesignOutlinedTextBox}" FontSize="15"  Margin="0,117,0,0" Background="#FF655555" BorderBrush="#BC000000" Foreground="White" CaretBrush="#FF2A2EDF" SelectionTextBrush="{x:Null}" SelectionBrush="#FFB39DDB" Width="350" Height="64" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+        <PasswordBox Name="passwordBox" materialDesign:HintAssist.Hint="Пароль" materialDesign:HintAssist.Foreground="#FF655555" Background="#FF655555" Foreground="White" FontSize="15" Style="{StaticResource MaterialDesignOutlinedRevealPasswordBox}" Width="350" Height="64" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,211,0,0" CaretBrush="#FF2A2EDF" SelectionTextBrush="{x:Null}"/>
+        <Button Name="buttonSignUp" Content="Регистрация" FontSize="20" Width="350" Height="64" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,310,0,0" Background="#FF14141F" BorderBrush="#FF6C34CF"/>
+    </Grid>
+</Window>
