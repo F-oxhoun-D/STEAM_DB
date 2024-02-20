@@ -7,6 +7,12 @@
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         Title="STEAM" Height="550" Width="1000" WindowStartupLocation="CenterScreen" Background="#FF14141F" BorderBrush="#FF14141F" Foreground="#FF14141F" WindowStyle="ThreeDBorderWindow" ResizeMode="CanMinimize" Icon="/steam_icon_188906.ico">
+    <Window.Resources>
+        <Style TargetType="DataGridColumnHeader">
+            <Setter Property="Background" Value="#FF444444"/>
+            <Setter Property="Height" Value="30"/>
+        </Style>
+    </Window.Resources>
     <Grid Background="#FF1D1D2D">
         <Border>
             <Grid>
@@ -21,7 +27,7 @@
                     </Grid>
                 </Border>
                 <Menu Grid.Row="0" Background="#FF14141F" Height="100" Width="700" Margin="300,0,0,0">
-                    <Button Name="gameButton" Style="{StaticResource MaterialDesignFlatLightBgButton}" Content="Игры" FontSize="24" Height="70" Width="182" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}"/>
+                    <Button Name="gameButton" Style="{StaticResource MaterialDesignFlatLightBgButton}" Content="Игры" FontSize="24" Height="70" Width="182" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" Click="GameButton_Click"/>
                     <Button Name="signInButton" Style="{StaticResource MaterialDesignFlatLightBgButton}" Content="Вход" FontSize="24" Height="70" Width="182" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}"/>
                     <Button Name="signIpButton" Style="{StaticResource MaterialDesignFlatLightBgButton}" Content="Регистрация" FontSize="24" Height="70" Width="182" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}"/>
                 </Menu>

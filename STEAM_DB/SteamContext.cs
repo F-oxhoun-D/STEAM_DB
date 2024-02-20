@@ -20,19 +20,19 @@ public partial class SteamContext : DbContext
     // файл логгирования (логгирование помогает нам контролировать все операции в приложении)
     private readonly StreamWriter logStream = new("mylog.txt", true);
 
-    public virtual DbSet<Developer> Developers { get; set; }
+    public  DbSet<Developer> Developers { get; set; }
 
-    public virtual DbSet<Game> Games { get; set; }
+    public  DbSet<Game> Games { get; set; }
 
-    public virtual DbSet<Genre> Genres { get; set; }
+    public  DbSet<Genre> Genres { get; set; }
 
-    public virtual DbSet<Purchase> Purchases { get; set; }
+    public DbSet<Purchase> Purchases { get; set; }
 
-    public virtual DbSet<Rating> Ratings { get; set; }
+    public DbSet<Rating> Ratings { get; set; }
 
-    public virtual DbSet<User> Users { get; set; }
+    public DbSet<User> Users { get; set; }
 
-    public virtual DbSet<Wishlist> Wishlists { get; set; }
+    public DbSet<Wishlist> Wishlists { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {

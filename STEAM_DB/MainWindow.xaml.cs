@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using Npgsql;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -19,6 +20,14 @@ namespace STEAM_DB
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void GameButton_Click(object sender, RoutedEventArgs e)
+        {
+            // делаем кнопку неактивной
+            gameButton.IsEnabled = false;
+            // в gamesGrid выводим список игр
+            gamesGrid.ItemsSource = ProcessRequest.GetListOfGames();
         }
     }
 }
