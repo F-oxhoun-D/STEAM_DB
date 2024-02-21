@@ -35,5 +35,11 @@ namespace STEAM_DB
             SignUpWindow signUpWindow = new ();
             signUpWindow.ShowDialog();
         }
+
+        private void SignInButton_Click(object sender, RoutedEventArgs e)
+        {
+            SignInWindow signInWindow = new ();
+            signInWindow.ShowDialog();
+        }
     }
 }
