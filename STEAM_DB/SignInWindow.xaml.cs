@@ -23,5 +23,10 @@ namespace STEAM_DB
         {
             InitializeComponent();
         }
+
+        private void ButtonSignIn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
