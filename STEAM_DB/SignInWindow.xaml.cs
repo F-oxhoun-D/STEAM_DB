@@ -26,7 +26,25 @@ namespace STEAM_DB
 
         private void ButtonSignIn_Click(object sender, RoutedEventArgs e)
         {
-
+            string errorMessage = "Заполните поля!";
+            if (textBoxUserName.Text != null)
+            {
+                if (passwordBox.Password.ToString() != null)
+                {
+                    string password = Hash.GetHash(passwordBox.Password.ToString());
+                    bool result = Authentication.CheckThePassword(textBoxUserName.Text, password);
+                    if (result)
+                    {
+                        MessageBox.Show("Вы успешно вошли в систему!");
+                    }
+                    else
+                        MessageBox.Show("Данные не верны!");
+                }
+                else
+                    MessageBox.Show(errorMessage);
+            }
+            else
+                MessageBox.Show(errorMessage);
         }
     }
 }

@@ -21,14 +21,19 @@ namespace STEAM_DB
                 {
                     if (passwordBox.Password.ToString() != null)
                     {
-                        bool result = AuthorizationDB.QueryCheckAvailability(textBoxEmail.Text);
+                        bool result = Authorization.QueryCheckAvailability(textBoxEmail.Text);
                         if (!result)
                         {
+                            // поучаем хеш пароля
                             string passwordHash = Hash.GetHash(passwordBox.Password.ToString());
+                            // сегодняшняя дата
                             DateTime date = DateTime.Today;
+                            // конвертируем в строку вида yyyy-MM-dd
                             string dateString = date.ToString("yyyy-MM-dd");
-                            AuthorizationDB.AddUserInDB(textBoxUserName.Text, textBoxEmail.Text, passwordHash, dateString);
+                            // передача параметров в метод AddUserInDB класса AuthorizationDB
+                            Authorization.AddUserInDB(textBoxUserName.Text, textBoxEmail.Text, passwordHash, dateString);
                             MessageBox.Show("Регистрация прошла успешно!");
+                            // закрываем окно регистрации
                             Close();
                         }
                         else
