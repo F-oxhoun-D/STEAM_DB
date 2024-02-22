@@ -11,7 +11,7 @@ public partial class User
 
     public string Email { get; set; } = null!;
 
-    public DateOnly RegistrationDate { get; set; }
+    public string Registration { get; set; } = null!;
 
     public string? Password { get; set; }
 

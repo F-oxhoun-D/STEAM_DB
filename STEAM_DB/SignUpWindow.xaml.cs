@@ -1,16 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+﻿using System.Windows;
 
 namespace STEAM_DB
 {
@@ -26,7 +14,34 @@ namespace STEAM_DB
 
         private void ButtonSignUp_Click(object sender, RoutedEventArgs e)
         {
-
+            string errorMessage = "Заполните поля!";
+            if (textBoxUserName.Text != null)
+            {
+                if (textBoxEmail.Text != null)
+                {
+                    if (passwordBox.Password.ToString() != null)
+                    {
+                        bool result = AuthorizationDB.QueryCheckAvailability(textBoxEmail.Text);
+                        if (!result)
+                        {
+                            string passwordHash = Hash.GetHash(passwordBox.Password.ToString());
+                            DateTime date = DateTime.Today;
+                            string dateString = date.ToString("yyyy-MM-dd");
+                            AuthorizationDB.AddUserInDB(textBoxUserName.Text, textBoxEmail.Text, passwordHash, dateString);
+                            MessageBox.Show("Регистрация прошла успешно!");
+                            Close();
+                        }
+                        else
+                            MessageBox.Show("Данная почта уже существует!");
+                    }
+                    else
+                        MessageBox.Show(errorMessage);
+                }
+                else
+                    MessageBox.Show(errorMessage);
+            }
+            else
+                MessageBox.Show(errorMessage);
         }
     }
 }

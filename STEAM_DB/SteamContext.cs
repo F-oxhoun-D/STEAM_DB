@@ -173,7 +173,9 @@ public partial class SteamContext : DbContext
             entity.Property(e => e.Password)
                 .HasMaxLength(50)
                 .HasColumnName("password");
-            entity.Property(e => e.RegistrationDate).HasColumnName("registration_date");
+            entity.Property(e => e.Registration)
+                .HasMaxLength(15)
+                .HasColumnName("registration");
             entity.Property(e => e.Username)
                 .HasMaxLength(255)
                 .HasColumnName("username");

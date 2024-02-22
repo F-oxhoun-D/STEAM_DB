@@ -1,16 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace STEAM_DB
 {
-    internal class ConnectionToDataBase
+    abstract internal class ConnectionToDataBase
     {
         public static DbContextOptions<SteamContext> GetConnectionString()
         {
