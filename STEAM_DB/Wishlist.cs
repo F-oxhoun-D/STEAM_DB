@@ -11,7 +11,7 @@ public partial class Wishlist
 
     public int? UserId { get; set; }
 
-    public virtual Game? Game { get; set; }
+    public Game? Game { get; set; }
 
-    public virtual User? User { get; set; }
+    public User? User { get; set; }
 }

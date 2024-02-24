@@ -11,5 +11,5 @@ public partial class Developer
 
     public string Country { get; set; } = null!;
 
-    public virtual ICollection<Game> Games { get; set; } = new List<Game>();
+    public ICollection<Game> Games { get; set; } = new List<Game>();
 }

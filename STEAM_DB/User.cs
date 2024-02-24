@@ -13,11 +13,11 @@ public partial class User
 
     public string Registration { get; set; } = null!;
 
-    public string? Password { get; set; }
+    public string Password { get; set; } = null!;
 
-    public virtual ICollection<Purchase> Purchases { get; set; } = new List<Purchase>();
+    public ICollection<Purchase> Purchases { get; set; } = new List<Purchase>();
 
-    public virtual ICollection<Rating> Ratings { get; set; } = new List<Rating>();
+    public ICollection<Rating> Ratings { get; set; } = new List<Rating>();
 
-    public virtual ICollection<Wishlist> Wishlists { get; set; } = new List<Wishlist>();
+    public ICollection<Wishlist> Wishlists { get; set; } = new List<Wishlist>();
 }

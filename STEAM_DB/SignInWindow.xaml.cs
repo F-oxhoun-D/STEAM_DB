@@ -36,6 +36,10 @@ namespace STEAM_DB
                     if (result)
                     {
                         MessageBox.Show("Вы успешно вошли в систему!");
+                        Close();
+                        Authentication.GetUser(textBoxUserName.Text, password);
+                        PersonalAccountWindow window = new();
+                        window.ShowDialog();
                     }
                     else
                         MessageBox.Show("Данные не верны!");

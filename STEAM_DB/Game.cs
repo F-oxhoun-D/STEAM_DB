@@ -19,13 +19,13 @@ public partial class Game
 
     public int? GenreId { get; set; }
 
-    public virtual Developer? Developer { get; set; }
+    public Developer? Developer { get; set; }
 
-    public virtual Genre? Genre { get; set; }
+    public Genre? Genre { get; set; }
 
-    public virtual ICollection<Purchase> Purchases { get; set; } = new List<Purchase>();
+    public ICollection<Purchase> Purchases { get; set; } = new List<Purchase>();
 
-    public virtual ICollection<Rating> Ratings { get; set; } = new List<Rating>();
+    public ICollection<Rating> Ratings { get; set; } = new List<Rating>();
 
-    public virtual ICollection<Wishlist> Wishlists { get; set; } = new List<Wishlist>();
+    public ICollection<Wishlist> Wishlists { get; set; } = new List<Wishlist>();
 }
