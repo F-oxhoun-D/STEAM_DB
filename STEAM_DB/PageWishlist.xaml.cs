@@ -25,7 +25,7 @@ namespace STEAM_DB
             InitializeComponent();
             List<string> list = ProcessRequest.GetListOfWishlist(Global.user.UserId);
             foreach (var m in list)
-                wishlistGrid.Items.Add(m);
+                listBoxWishlist.Items.Add(m);
         }
     }
 }

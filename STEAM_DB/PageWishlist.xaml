@@ -5,13 +5,19 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:STEAM_DB"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="PageWishlist">
+      d:DesignHeight="450"
+      Title="PageWishlist" Width="1000" Height="434">
     <Page.Resources>
 
     </Page.Resources>
     <Grid>
-        <ListView x:Name="wishlistGrid"  Grid.Row="1" Background="{x:Null}" Foreground="White" >
-        </ListView>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Rectangle Grid.Row="0" Fill="#FF655555"/>
+        <ListBox x:Name="listBoxWishlist" Grid.Row="1" FontSize="20" Foreground="White" Background="{x:Null}" Height="300" Width="800" VerticalAlignment="Top" HorizontalAlignment="Center" BorderBrush="#FF4C4C72"></ListBox>
+        <Button x:Name="buttonBuyGame" Grid.Row="1" Content="Купить" Width="100" Height="40" Background="#FF14141F" BorderBrush="#FF4C4C72" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,150,70" />
+        <Button x:Name="buttonRemoveGame" Grid.Row="1" Content="Удалить" Width="100" Height="40" VerticalAlignment="Bottom" Background="#FF14141F" BorderBrush="#FF4C4C72" HorizontalAlignment="Center" Margin="150,0,0,70" />
     </Grid>
 </Page>
