@@ -32,12 +32,12 @@ namespace STEAM_DB
 
         private void WishlistButton_Click(object sender, RoutedEventArgs e)
         {
-
+            PersonalAccountFrame.Content = new PageWishlist();
         }
 
         private void GameButton_Click(object sender, RoutedEventArgs e)
         {
-
+            PersonalAccountFrame.Content = new PageGame();
         }
 
         private void Load()

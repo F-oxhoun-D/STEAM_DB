@@ -8,10 +8,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
             Title="STEAM" Height="550" Width="1000" WindowStartupLocation="CenterScreen" Background="#FF14141F" BorderBrush="#FF14141F" Foreground="#FF14141F" WindowStyle="ThreeDBorderWindow" ResizeMode="CanMinimize" Icon="/steam_icon_188906.ico">
     <Window.Resources>
-        <Style TargetType="DataGridColumnHeader">
-            <Setter Property="Background" Value="#FF655555"/>
-            <Setter Property="Height" Value="30"/>
-        </Style>
+       
     </Window.Resources>
     <Grid Background="#FF1D1D2D">
         <Border>
@@ -31,8 +28,9 @@
                     <Button Name="purchaseButton" Style="{StaticResource MaterialDesignFlatLightBgButton}" Content="Покупки" FontSize="24" Height="70" Width="182" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" VerticalAlignment="Top" Click="PurchaseButton_Click"/>
                     <Button Name="wishlistButton" Style="{StaticResource MaterialDesignFlatLightBgButton}" Content="Избранное" FontSize="24" Height="70" Width="182" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" Click="WishlistButton_Click"/>
                 </Menu>
-                <DataGrid x:Name="gamesGrid" AutoGenerateColumns="True" Grid.Row="1" Background="{x:Null}" Foreground="White" IsReadOnly="True">
-                </DataGrid>
+                <Frame Grid.Row="1" Name="PersonalAccountFrame">
+
+                </Frame>
             </Grid>
         </Border>
     </Grid>
