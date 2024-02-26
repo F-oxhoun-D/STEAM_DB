@@ -23,6 +23,11 @@ namespace STEAM_DB
         public PageWishlist()
         {
             InitializeComponent();
+            Load();
+        }
+
+        private void Load()
+        {
             List<string> list = ProcessRequest.GetListOfWishlist(Global.user.UserId);
             foreach (var m in list)
                 listBoxWishlist.Items.Add(m);

@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:STEAM_DB"
       mc:Ignorable="d" 
       d:DesignHeight="450"
-      Title="PageWishlist" Width="1000" Height="434">
+      Title="PageWishlist" Width="1000" Height="434" ShowsNavigationUI="False">
     <Page.Resources>
 
     </Page.Resources>

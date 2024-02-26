@@ -26,6 +26,32 @@ namespace STEAM_DB
             return gamesSort;
         }
 
+        public static List<string[]> GetListOfGamess()
+        {
+            // создаём подключение с базой данных
+            using SteamContext context = new(options);
+            var Info = context.Games.Join(context.Developers,
+                g => g.DeveloperId,
+                b => b.DeveloperId,
+                (g, b) => new
+                {
+                    g.Title,
+                    g.Description,
+                    b.Developername
+                });
+            List<string[]> gamesInfo = [];
+            int i = 0;
+            foreach (var game in Info)
+            {
+                gamesInfo.Add(new string[3]);
+                gamesInfo[i][0] = game.Title;
+                gamesInfo[i][1] = game.Description;
+                gamesInfo[i][2] = game.Developername;
+                i++;
+            }
+            return gamesInfo;
+        }
+
         public static List<string> GetListOfWishlist(int id)
         {
             List<string> list = [];

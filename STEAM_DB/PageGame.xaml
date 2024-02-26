@@ -5,16 +5,18 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:STEAM_DB"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="PageGame">
+      d:DesignHeight="450"
+      Title="PageGame" Width="1000" Height="434" ShowsNavigationUI="False">
     <Page.Resources>
         <Style TargetType="DataGridColumnHeader">
             <Setter Property="Background" Value="#FF655555"/>
             <Setter Property="Height" Value="30"/>
         </Style>
     </Page.Resources>
-    <Grid>
-        <DataGrid x:Name="gamesGrid" AutoGenerateColumns="True" Grid.Row="1" Background="{x:Null}" Foreground="White" IsReadOnly="True">
+    <Grid Height="450">
+        <DataGrid x:Name="gamesGrid" AutoGenerateColumns="True" Grid.Row="1" Background="{x:Null}" Foreground="White" IsReadOnly="True" Height="300" VerticalAlignment="Top">
         </DataGrid>
+        <Button x:Name="buttonBuyGame" Grid.Row="1" Content="Купить" Width="100" Height="40" Background="#FF14141F" BorderBrush="#FF4C4C72" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,150,70" />
+        <Button x:Name="buttonAddToWishlist" Grid.Row="1" Content="Добавить" Width="100" Height="40" VerticalAlignment="Bottom" Background="#FF14141F" BorderBrush="#FF4C4C72" HorizontalAlignment="Center" Margin="150,0,0,70" />
     </Grid>
 </Page>

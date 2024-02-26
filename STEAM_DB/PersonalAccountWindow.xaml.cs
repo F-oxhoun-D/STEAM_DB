@@ -19,30 +19,37 @@ namespace STEAM_DB
     /// </summary>
     public partial class PersonalAccountWindow : Window
     {
+        public List<Page> listPage = [];
+
         public PersonalAccountWindow()
         {
             InitializeComponent();
             Load();
         }
+        private void GameButton_Click(object sender, RoutedEventArgs e)
+        {
+            int indx = 0;
+            PersonalAccountFrame.Content = listPage[indx];
+        }
 
         private void PurchaseButton_Click(object sender, RoutedEventArgs e)
         {
-
+            int indx = 1;
+            PersonalAccountFrame.Content = listPage[indx];
         }
 
         private void WishlistButton_Click(object sender, RoutedEventArgs e)
         {
-            PersonalAccountFrame.Content = new PageWishlist();
-        }
-
-        private void GameButton_Click(object sender, RoutedEventArgs e)
-        {
-            PersonalAccountFrame.Content = new PageGame();
+            int indx = 2;
+            PersonalAccountFrame.Content = listPage[indx];
         }
 
         private void Load()
         {
             userLabel.Content = Global.user.Username.ToString();
+            listPage.Add(new PageGame());
+            listPage.Add(new PagePurchase());
+            listPage.Add(new PageWishlist());
         }
     }
 }

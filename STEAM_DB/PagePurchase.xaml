@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:STEAM_DB"
       mc:Ignorable="d" 
       d:DesignHeight="450"
-      Title="PagePurchase" Width="1000" Height="434">
+      Title="PagePurchase" Width="1000" Height="434" ShowsNavigationUI="False">
 
     <Grid>
 
