@@ -2,6 +2,7 @@
 using Npgsql;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,7 +15,7 @@ namespace STEAM_DB
         static readonly DbContextOptions<SteamContext> options = ConnectionToDataBase.ConnectionStringOptions;
         static readonly string connection = ConnectionToDataBase.ConnectionString;
 
-        public static List<Game> GetListOfGames()
+        /*public static List<Game> GetListOfGames()
         {
             // создаём подключение с базой данных
             using SteamContext context = new(options);
@@ -24,32 +25,41 @@ namespace STEAM_DB
             List<Game> gamesSort = [.. games.OrderBy(p => p.GameId)]; // games.OrderBy(p => p.GameId).ToList()
             // возврашяем отсортированный список
             return gamesSort;
+        }*/
+
+        public static DataView GetListOfGames()
+        {
+            NpgsqlConnection con = new(ConnectionToDataBase.ConnectionString);
+            con.Open();
+            NpgsqlCommand cmd = new()
+            {
+                Connection = con,
+                CommandText = $"select g.title, g.description, d.developername from games g, developers d where  g.developer_id = d.developer_id;"
+            };
+            cmd.ExecuteNonQuery();
+            NpgsqlDataAdapter dataAdapter = new (cmd);
+            DataTable dt = new("Games");
+            dataAdapter.Fill(dt);
+            con.Close();
+            return dt.DefaultView;
         }
 
-        public static List<string[]> GetListOfGamess()
+        public static DataView GetListOfPurchase(int id)
         {
-            // создаём подключение с базой данных
-            using SteamContext context = new(options);
-            var Info = context.Games.Join(context.Developers,
-                g => g.DeveloperId,
-                b => b.DeveloperId,
-                (g, b) => new
-                {
-                    g.Title,
-                    g.Description,
-                    b.Developername
-                });
-            List<string[]> gamesInfo = [];
-            int i = 0;
-            foreach (var game in Info)
+            List<string[]> list = [];
+            NpgsqlConnection con = new(connection);
+            con.Open();
+            NpgsqlCommand cmd = new()
             {
-                gamesInfo.Add(new string[3]);
-                gamesInfo[i][0] = game.Title;
-                gamesInfo[i][1] = game.Description;
-                gamesInfo[i][2] = game.Developername;
-                i++;
-            }
-            return gamesInfo;
+                Connection = con,
+                CommandText = $"select g.title, p.date from games g join purchases p on g.game_id = p.game_id and p.user_id = {id};"
+            };
+            cmd.ExecuteNonQuery();
+            NpgsqlDataAdapter dataAdapter = new (cmd);
+            DataTable dt = new("Games");
+            dataAdapter.Fill(dt);
+            con.Close();
+            return dt.DefaultView;
         }
 
         public static List<string> GetListOfWishlist(int id)

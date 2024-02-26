@@ -23,6 +23,12 @@ namespace STEAM_DB
         public PagePurchase()
         {
             InitializeComponent();
+            Load();
+        }
+
+        private void Load()
+        {
+            purchasesGrid.ItemsSource = ProcessRequest.GetListOfPurchase(Global.user.UserId); 
         }
     }
 }

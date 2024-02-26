@@ -7,8 +7,15 @@
       mc:Ignorable="d" 
       d:DesignHeight="450"
       Title="PagePurchase" Width="1000" Height="434" ShowsNavigationUI="False">
-
+    <Page.Resources>
+        <Style TargetType="DataGridColumnHeader">
+            <Setter Property="Background" Value="#FF655555"/>
+            <Setter Property="Height" Value="30"/>
+        </Style>
+    </Page.Resources>
     <Grid>
-
+        <DataGrid x:Name="purchasesGrid" AutoGenerateColumns="True" Grid.Row="1" Background="{x:Null}" Foreground="White" IsReadOnly="True" Height="300" VerticalAlignment="Top">
+        </DataGrid>
+        <Button x:Name="buttonSellTheGame" Grid.Row="1" Content="Продать" Width="100" Height="40" Background="#FF14141F" BorderBrush="#FF4C4C72" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,70" />
     </Grid>
 </Page>
