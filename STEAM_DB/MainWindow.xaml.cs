@@ -28,7 +28,7 @@ namespace STEAM_DB
             // делаем кнопку неактивной
             gameButton.IsEnabled = false;
             // в gamesGrid выводим список игр
-            gamesGrid.ItemsSource = ProcessRequest.GetListOfGamess();
+            gamesGrid.ItemsSource = ProcessRequest.GetListOfGames();
         }
 
         private void SignUpButton_Click(object sender, RoutedEventArgs e)
