@@ -17,7 +17,7 @@
         </Grid.RowDefinitions>
         <Rectangle Grid.Row="0" Fill="#FF655555"/>
         <ListBox x:Name="listBoxWishlist" Grid.Row="1" FontSize="20" Foreground="White" Background="{x:Null}" Height="300" Width="800" VerticalAlignment="Top" HorizontalAlignment="Center" BorderBrush="#FF4C4C72"></ListBox>
-        <Button x:Name="buttonBuyGame" Grid.Row="1" Content="Купить" Width="100" Height="40" Background="#FF14141F" BorderBrush="#FF4C4C72" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,150,70" />
-        <Button x:Name="buttonRemoveGame" Grid.Row="1" Content="Удалить" Width="100" Height="40" VerticalAlignment="Bottom" Background="#FF14141F" BorderBrush="#FF4C4C72" HorizontalAlignment="Center" Margin="150,0,0,70" />
+        <Button x:Name="buttonBuyGame" Grid.Row="1" Content="Купить" Width="100" Height="40" Background="#FF14141F" BorderBrush="#FF4C4C72" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,150,70" Click="ButtonBuyGame_Click" />
+        <Button x:Name="buttonRemoveGame" Grid.Row="1" Content="Удалить" Width="100" Height="40" VerticalAlignment="Bottom" Background="#FF14141F" BorderBrush="#FF4C4C72" HorizontalAlignment="Center" Margin="150,0,0,70" Click="ButtonRemoveGame_Click" />
     </Grid>
 </Page>

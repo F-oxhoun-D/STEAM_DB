@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,6 +25,18 @@ namespace STEAM_DB
         {
             InitializeComponent();
             gamesGrid.ItemsSource = ProcessRequest.GetListOfGames();
+        }
+
+        private void ButtonBuyGame_Click(object sender, RoutedEventArgs e)
+        {
+            PersonalAccountWindow window = new();
+            window.listPage[window.indxGame] = new PageGame();
+        }
+
+        private void ButtonAddToWishlist_Click(object sender, RoutedEventArgs e)
+        {
+            PersonalAccountWindow window = new();
+            window.listPage[window.indxWishlist] = new PageWishlist();
         }
     }
 }

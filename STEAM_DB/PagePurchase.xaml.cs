@@ -30,5 +30,11 @@ namespace STEAM_DB
         {
             purchasesGrid.ItemsSource = ProcessRequest.GetListOfPurchase(Global.user.UserId); 
         }
+
+        private void ButtonSellTheGame_Click(object sender, RoutedEventArgs e)
+        {
+            PersonalAccountWindow window = new();
+            window.listPage[window.indxPurchase] = new PagePurchase();
+        }
     }
 }

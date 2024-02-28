@@ -32,5 +32,17 @@ namespace STEAM_DB
             foreach (var m in list)
                 listBoxWishlist.Items.Add(m);
         }
+
+        private void ButtonBuyGame_Click(object sender, RoutedEventArgs e)
+        {
+            PersonalAccountWindow window = new();
+            window.listPage[window.indxGame] = new PageGame();
+        }
+
+        private void ButtonRemoveGame_Click(object sender, RoutedEventArgs e)
+        {
+            PersonalAccountWindow window = new();
+            window.listPage[window.indxWishlist] = new PageWishlist();
+        }
     }
 }

@@ -20,6 +20,9 @@ namespace STEAM_DB
     public partial class PersonalAccountWindow : Window
     {
         public List<Page> listPage = [];
+        public int indxGame = 0;
+        public int indxPurchase = 1;
+        public int indxWishlist = 2;
 
         public PersonalAccountWindow()
         {
@@ -28,20 +31,17 @@ namespace STEAM_DB
         }
         private void GameButton_Click(object sender, RoutedEventArgs e)
         {
-            int indx = 0;
-            PersonalAccountFrame.Content = listPage[indx];
+            PersonalAccountFrame.Content = listPage[indxGame];
         }
 
         private void PurchaseButton_Click(object sender, RoutedEventArgs e)
         {
-            int indx = 1;
-            PersonalAccountFrame.Content = listPage[indx];
+            PersonalAccountFrame.Content = listPage[indxPurchase];
         }
 
         private void WishlistButton_Click(object sender, RoutedEventArgs e)
         {
-            int indx = 2;
-            PersonalAccountFrame.Content = listPage[indx];
+            PersonalAccountFrame.Content = listPage[indxWishlist];
         }
 
         private void Load()
