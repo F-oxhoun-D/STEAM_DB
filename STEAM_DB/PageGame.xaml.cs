@@ -1,18 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace STEAM_DB
 {
@@ -29,14 +16,49 @@ namespace STEAM_DB
 
         private void ButtonBuyGame_Click(object sender, RoutedEventArgs e)
         {
-            PersonalAccountWindow window = new();
-            window.listPage[window.indxGame] = new PageGame();
+            // индекс выбранной строки
+            int indx = gamesGrid.SelectedIndex;
+            // ячейка
+            var cell = new DataGridCellInfo(gamesGrid.Items[indx], gamesGrid.Columns[0]);
+            TextBlock content = (TextBlock)cell.Column.GetCellContent(cell.Item);
+            // название выбранной игры
+            string gameName = content.Text;
+
+            int gameId = -1;
+            bool check = ProcessRequest.CheckThePurchase(gameName, ref gameId);
+            if (!check)
+            {
+                ProcessRequest.BuyGame(gameId);
+                MessageBox.Show("Поздравляем с покупкой");
+
+                PersonalAccountWindow.listPage[PersonalAccountWindow.indxPurchase] = new PagePurchase();
+            }
+            else
+                MessageBox.Show("Данная игра уже куплена Вами");
         }
 
         private void ButtonAddToWishlist_Click(object sender, RoutedEventArgs e)
         {
-            PersonalAccountWindow window = new();
-            window.listPage[window.indxWishlist] = new PageWishlist();
+            // индекс выбранной строки
+            int indx = gamesGrid.SelectedIndex;
+            // ячейка
+            var cell = new DataGridCellInfo(gamesGrid.Items[indx], gamesGrid.Columns[0]);
+            TextBlock content = (TextBlock)cell.Column.GetCellContent(cell.Item);
+            // название выбранной игры
+            string gameName = content.Text;
+
+            int gameId = -1;
+            bool check = ProcessRequest.CheckTheWishlist(gameName, ref gameId);
+            if (!check)
+            {
+                ProcessRequest.AddToWishlist(gameId);
+                MessageBox.Show("Игра добавлена в избранное");
+
+                PersonalAccountWindow.listPage[PersonalAccountWindow.indxWishlist] = new PageWishlist();
+            }
+            else
+                MessageBox.Show("Игра уже добавлена");
+
         }
     }
 }

@@ -35,14 +35,12 @@ namespace STEAM_DB
 
         private void ButtonBuyGame_Click(object sender, RoutedEventArgs e)
         {
-            PersonalAccountWindow window = new();
-            window.listPage[window.indxGame] = new PageGame();
+            PersonalAccountWindow.listPage[PersonalAccountWindow.indxGame] = new PageGame();
         }
 
         private void ButtonRemoveGame_Click(object sender, RoutedEventArgs e)
         {
-            PersonalAccountWindow window = new();
-            window.listPage[window.indxWishlist] = new PageWishlist();
+            PersonalAccountWindow.listPage[PersonalAccountWindow.indxWishlist] = new PageWishlist();
         }
     }
 }

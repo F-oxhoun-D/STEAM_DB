@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Security.Cryptography.Pkcs;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -27,27 +28,34 @@ namespace STEAM_DB
             return gamesSort;
         }*/
 
-        public static DataView GetListOfGames()
-        {
-            NpgsqlConnection con = new(ConnectionToDataBase.ConnectionString);
+        internal static DataView GetListOfGames() // получение списка игр
+        { 
+            // подключение к бд
+            using NpgsqlConnection con = new(ConnectionToDataBase.ConnectionString);
             con.Open();
+            // задаём команду
             NpgsqlCommand cmd = new()
             {
                 Connection = con,
                 CommandText = $"select g.title, g.description, d.developername from games g, developers d where  g.developer_id = d.developer_id;"
             };
+            // выполняем запрос
             cmd.ExecuteNonQuery();
+            // для создания таблицы
             NpgsqlDataAdapter dataAdapter = new (cmd);
             DataTable dt = new("Games");
             dataAdapter.Fill(dt);
+            // закрываем подключение
+            con.Dispose();
             con.Close();
+            // возвращяем объект
             return dt.DefaultView;
         }
 
-        public static DataView GetListOfPurchase(int id)
+        internal static DataView GetListOfPurchase(in int id) // список покупок
         {
             List<string[]> list = [];
-            NpgsqlConnection con = new(connection);
+            using NpgsqlConnection con = new(connection);
             con.Open();
             NpgsqlCommand cmd = new()
             {
@@ -58,25 +66,30 @@ namespace STEAM_DB
             NpgsqlDataAdapter dataAdapter = new (cmd);
             DataTable dt = new("Games");
             dataAdapter.Fill(dt);
+            con.Dispose();
             con.Close();
             return dt.DefaultView;
         }
 
-        public static List<string> GetListOfWishlist(int id)
+        internal static List<string> GetListOfWishlist(in int id) // список избранного
         {
             List<string> list = [];
-            NpgsqlConnection con = new(connection);
+            using NpgsqlConnection con = new(connection);
             con.Open();
             NpgsqlCommand cmd = new()
             {
                 Connection = con,
                 CommandText = $"select g.title from games g, wishlist w where w.user_id = {id} and g.game_id = w.game_id;"
             };
+            // чтение данных
             NpgsqlDataReader reader = cmd.ExecuteReader();
+            // пока данные есть выполняем запись
             while (reader.Read())
             {
                 list.Add(reader.GetString(0));
             }
+            con.Dispose();
+            con.Close();
             return list;
             /*var games = context.Games.Join(context.Wishlists, g => g.GameId,
                 w => w.GameId,
@@ -89,6 +102,103 @@ namespace STEAM_DB
                 $"where w.user_id = {id} and g.game_id = w.game_id").ToList();
 
             return games;*/
+        }
+
+        private static void GetID(in string gameName, ref int gameId)
+        {
+            using NpgsqlConnection con = new(connection);
+            con.Open();
+            NpgsqlCommand cmd = new()
+            {
+                Connection = con,
+                CommandText = $"select game_id from games where title = '{gameName}';"
+            };
+            NpgsqlDataReader reader = cmd.ExecuteReader();
+            int userId = Global.user.UserId;
+            while (reader.Read())
+            {
+                gameId = reader.GetInt32(0);
+            }
+            con.Dispose();
+            con.Close();
+        }
+
+        internal static bool CheckThePurchase(in string gameName, ref int gameId) // проверка покупки (куплена ли данная игра или нет) 
+        {
+            GetID(gameName, ref gameId);
+            int userId = Global.user.UserId;
+            using NpgsqlConnection con = new(connection);
+            con.Open();
+            NpgsqlCommand cmd = new()
+            {
+                Connection = con,
+                CommandText = $"select count(*) from purchases where game_id = {gameId} and user_id = {userId};"
+            };
+            int count = -1;
+            object? obj = cmd.ExecuteScalar();
+
+            con.Dispose();
+            con.Close();
+
+            if (obj != null)
+                count = (int)(long)obj;
+            if (count > 0)
+                return true;
+            else
+                return false;
+        }
+
+        internal static void BuyGame(in int gameId) // покупка игры
+        {
+            // сегодняшняя дата
+            DateTime date = DateTime.Today;
+            // конвертируем в строку вида yyyy-MM-dd
+            string dateString = date.ToString("yyyy-MM-dd");
+
+            int userId = Global.user.UserId;
+
+            Purchase purchase = new() { PurchaseDate =  dateString, GameId = gameId, UserId = userId };
+
+            using SteamContext context = new(options);
+            context.Purchases.Add(purchase);
+            context.SaveChanges();
+            context.Dispose();
+        }
+
+        internal static bool CheckTheWishlist(in string gameName, ref int gameId) // проверка избранного
+        {
+            GetID(gameName, ref gameId);
+            int userId = Global.user.UserId;
+            using NpgsqlConnection con = new(connection);
+            con.Open();
+            NpgsqlCommand cmd = new()
+            {
+                Connection = con,
+                CommandText = $"select count(*) from wishlist where game_id = {gameId} and user_id = {userId};"
+            };
+            int count = -1;
+            object? obj = cmd.ExecuteScalar();
+
+            con.Dispose();
+            con.Close();
+
+            if (obj != null)
+                count = (int)(long)obj;
+            if (count > 0)
+                return true;
+            else
+                return false;
+        }
+
+        internal static void AddToWishlist(in int gameId)
+        {
+            int userId = Global.user.UserId;
+            Wishlist wishlist = new() { UserId = userId, GameId = gameId};
+
+            using SteamContext context = new(options);
+            context.Wishlists.Add(wishlist);
+            context.SaveChanges();  
+            context.Dispose();
         }
     }
 }

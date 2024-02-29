@@ -33,8 +33,7 @@ namespace STEAM_DB
 
         private void ButtonSellTheGame_Click(object sender, RoutedEventArgs e)
         {
-            PersonalAccountWindow window = new();
-            window.listPage[window.indxPurchase] = new PagePurchase();
+            PersonalAccountWindow.listPage[PersonalAccountWindow.indxPurchase] = new PagePurchase();
         }
     }
 }

@@ -18,11 +18,13 @@ namespace STEAM_DB
     /// Логика взаимодействия для PersonalAccountWindow.xaml
     /// </summary>
     public partial class PersonalAccountWindow : Window
-    {
-        public List<Page> listPage = [];
-        public int indxGame = 0;
-        public int indxPurchase = 1;
-        public int indxWishlist = 2;
+    { 
+        // список, хранящий страницы
+        public static readonly List<Page> listPage = [];
+        // индексы страниц
+        public const int indxGame = 0;
+        public const int indxPurchase = 1;
+        public const int indxWishlist = 2;
 
         public PersonalAccountWindow()
         {
@@ -31,6 +33,8 @@ namespace STEAM_DB
         }
         private void GameButton_Click(object sender, RoutedEventArgs e)
         {
+            // по нажатию кнопки обращяемся к конкретной странице из списка
+            // делается для того, чтобы экономить память (не создавать каждый раз новый экземпляр без необходимости)
             PersonalAccountFrame.Content = listPage[indxGame];
         }
 
@@ -47,6 +51,7 @@ namespace STEAM_DB
         private void Load()
         {
             userLabel.Content = Global.user.Username.ToString();
+            // добавляем в список каждую страницу
             listPage.Add(new PageGame());
             listPage.Add(new PagePurchase());
             listPage.Add(new PageWishlist());

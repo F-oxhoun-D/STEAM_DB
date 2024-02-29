@@ -7,7 +7,7 @@ public partial class Purchase
 {
     public int PurchaseId { get; set; }
 
-    public DateOnly PurchaseDate { get; set; }
+    public string PurchaseDate { get; set; } = null!;
 
     public int? GameId { get; set; }
 

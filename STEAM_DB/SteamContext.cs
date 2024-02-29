@@ -125,7 +125,9 @@ public partial class SteamContext : DbContext
 
             entity.Property(e => e.PurchaseId).HasColumnName("purchase_id");
             entity.Property(e => e.GameId).HasColumnName("game_id");
-            entity.Property(e => e.PurchaseDate).HasColumnName("purchase_date");
+            entity.Property(e => e.PurchaseDate)
+                .HasMaxLength(15)
+                .HasColumnName("date");
             entity.Property(e => e.UserId).HasColumnName("user_id");
 
             entity.HasOne(d => d.Game).WithMany(p => p.Purchases)
