@@ -150,6 +150,8 @@ namespace STEAM_DB
 
         internal static void BuyGame(in int gameId) // покупка игры
         {
+            string sql = "select count(purchase_id) from purchases;";
+            int Id = GetNextID(sql);
             // сегодняшняя дата
             DateTime date = DateTime.Today;
             // конвертируем в строку вида yyyy-MM-dd
@@ -157,7 +159,7 @@ namespace STEAM_DB
 
             int userId = Global.user.UserId;
 
-            Purchase purchase = new() { PurchaseDate =  dateString, GameId = gameId, UserId = userId };
+            Purchase purchase = new() { PurchaseId = Id, PurchaseDate =  dateString, GameId = gameId, UserId = userId };
 
             using SteamContext context = new(options);
             context.Purchases.Add(purchase);
@@ -190,15 +192,42 @@ namespace STEAM_DB
                 return false;
         }
 
-        internal static void AddToWishlist(in int gameId)
+        internal static void AddToWishlist(in int gameId) // добавить в избранное
         {
+            string sql = "select count(wishlist_id) from wishlist;";
+            int Id = GetNextID(sql);
+
             int userId = Global.user.UserId;
-            Wishlist wishlist = new() { UserId = userId, GameId = gameId};
+            Wishlist wishlist = new() { WishlistId = Id, UserId = userId, GameId = gameId};
 
             using SteamContext context = new(options);
             context.Wishlists.Add(wishlist);
             context.SaveChanges();  
             context.Dispose();
+        }
+
+        private static int GetNextID(in string sql) // получаем следующее айди 
+        {
+            int prevId;
+
+            NpgsqlConnection con = new(connection);
+            con.Open();
+
+            NpgsqlCommand cmd = new()
+            {
+                Connection = con,
+                CommandText = sql
+            };
+
+            object? obj = cmd.ExecuteScalar();
+
+            if (obj != null)
+            {
+                prevId = (int)(long)obj;
+                return prevId + 1;
+            }
+            else
+                return 1;
         }
     }
 }

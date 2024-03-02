@@ -1,4 +1,6 @@
-﻿namespace STEAM_DB
+﻿using Npgsql;
+
+namespace STEAM_DB
 {
     internal class Authorization: ConnectionToDataBase
     {
@@ -13,14 +15,39 @@
 
         public static void AddUserInDB(string name, string email, string password, string date)
         {
+            int Id = GetNextID();
             // создание пользователя
-            User user = new() { Username = name, Email = email, Password = password, Registration = date};
+            User user = new() { UserId = Id, Username = name, Email = email, Password = password, Registration = date};
             // создание объекта контекста данных
             using SteamContext context = new (ConnectionStringOptions);
             // добавляем в бд
             context.Users.Add(user);
             // сохраняем изменения
             context.SaveChanges();
+        }
+
+        private static int GetNextID() // получаем следующий айди для заполнения в бд
+        {
+            int prevId;
+
+            using NpgsqlConnection con = new(ConnectionString);
+            con.Open();
+            NpgsqlCommand cmd = new()
+            {
+                Connection = con,
+                CommandText = "select count(user_id) from users;"
+            };
+            object? obj = cmd.ExecuteScalar();
+            con.Dispose();
+            con.Close();
+
+            if (obj != null)
+            {
+                prevId = (int)(long)obj;
+                return prevId + 1;
+            }
+            else
+                return 1;
         }
     }
 }
