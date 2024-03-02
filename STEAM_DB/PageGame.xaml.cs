@@ -18,46 +18,56 @@ namespace STEAM_DB
         {
             // индекс выбранной строки
             int indx = gamesGrid.SelectedIndex;
-            // ячейка
-            var cell = new DataGridCellInfo(gamesGrid.Items[indx], gamesGrid.Columns[0]);
-            TextBlock content = (TextBlock)cell.Column.GetCellContent(cell.Item);
-            // название выбранной игры
-            string gameName = content.Text;
-
-            int gameId = -1;
-            bool check = ProcessRequest.CheckThePurchase(gameName, ref gameId);
-            if (!check)
+            if (indx != -1)
             {
-                ProcessRequest.BuyGame(gameId);
-                MessageBox.Show("Поздравляем с покупкой");
+                // ячейка
+                var cell = new DataGridCellInfo(gamesGrid.Items[indx], gamesGrid.Columns[0]);
+                TextBlock content = (TextBlock)cell.Column.GetCellContent(cell.Item);
+                // название выбранной игры
+                string gameName = content.Text;
 
-                PersonalAccountWindow.listPage[PersonalAccountWindow.indxPurchase] = new PagePurchase();
+                int gameId = -1;
+                bool check = ProcessRequest.CheckThePurchase(gameName, ref gameId);
+                if (!check)
+                {
+                    ProcessRequest.BuyGame(gameId);
+                    MessageBox.Show("Поздравляем с покупкой");
+
+                    PersonalAccountWindow.listPage[PersonalAccountWindow.indxPurchase] = new PagePurchase();
+                }
+                else
+                    MessageBox.Show("Данная игра уже куплена Вами");
             }
             else
-                MessageBox.Show("Данная игра уже куплена Вами");
+                MessageBox.Show("Выберите игру");
         }
 
         private void ButtonAddToWishlist_Click(object sender, RoutedEventArgs e)
         {
             // индекс выбранной строки
             int indx = gamesGrid.SelectedIndex;
-            // ячейка
-            var cell = new DataGridCellInfo(gamesGrid.Items[indx], gamesGrid.Columns[0]);
-            TextBlock content = (TextBlock)cell.Column.GetCellContent(cell.Item);
-            // название выбранной игры
-            string gameName = content.Text;
-
-            int gameId = -1;
-            bool check = ProcessRequest.CheckTheWishlist(gameName, ref gameId);
-            if (!check)
+            if (indx != -1)
             {
-                ProcessRequest.AddToWishlist(gameId);
-                MessageBox.Show("Игра добавлена в избранное");
+                // ячейка
+                var cell = new DataGridCellInfo(gamesGrid.Items[indx], gamesGrid.Columns[0]);
+                TextBlock content = (TextBlock)cell.Column.GetCellContent(cell.Item);
+                // название выбранной игры
+                string gameName = content.Text;
 
-                PersonalAccountWindow.listPage[PersonalAccountWindow.indxWishlist] = new PageWishlist();
+                int gameId = -1;
+                bool check = ProcessRequest.CheckTheWishlist(gameName, ref gameId);
+                if (!check)
+                {
+                    ProcessRequest.AddToWishlist(gameId);
+                    MessageBox.Show("Игра добавлена в избранное");
+
+                    PersonalAccountWindow.listPage[PersonalAccountWindow.indxWishlist] = new PageWishlist();
+                }
+                else
+                    MessageBox.Show("Игра уже добавлена");
             }
             else
-                MessageBox.Show("Игра уже добавлена");
+                MessageBox.Show("Выберите игру");
 
         }
     }

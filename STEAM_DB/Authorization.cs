@@ -28,26 +28,23 @@ namespace STEAM_DB
 
         private static int GetNextID() // получаем следующий айди для заполнения в бд
         {
-            int prevId;
+            int prevId = 0;
 
             using NpgsqlConnection con = new(ConnectionString);
             con.Open();
             NpgsqlCommand cmd = new()
             {
                 Connection = con,
-                CommandText = "select count(user_id) from users;"
+                CommandText = "select user_id from users order by user_id desc limit 1;"
             };
-            object? obj = cmd.ExecuteScalar();
+            NpgsqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+                prevId = reader.GetInt32(0);
+
             con.Dispose();
             con.Close();
 
-            if (obj != null)
-            {
-                prevId = (int)(long)obj;
-                return prevId + 1;
-            }
-            else
-                return 1;
+            return prevId + 1;
         }
     }
 }

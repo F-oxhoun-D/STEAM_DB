@@ -150,7 +150,7 @@ namespace STEAM_DB
 
         internal static void BuyGame(in int gameId) // покупка игры
         {
-            string sql = "select count(purchase_id) from purchases;";
+            string sql = "select purchase_id from purchases order by purchase_id desc limit 1;";
             int Id = GetNextID(sql);
             // сегодняшняя дата
             DateTime date = DateTime.Today;
@@ -194,7 +194,7 @@ namespace STEAM_DB
 
         internal static void AddToWishlist(in int gameId) // добавить в избранное
         {
-            string sql = "select count(wishlist_id) from wishlist;";
+            string sql = "select wishlist_id from wishlist order by wishlist_id desc limit 1;";
             int Id = GetNextID(sql);
 
             int userId = Global.user.UserId;
@@ -208,7 +208,7 @@ namespace STEAM_DB
 
         private static int GetNextID(in string sql) // получаем следующее айди 
         {
-            int prevId;
+            int prevId = 0;
 
             NpgsqlConnection con = new(connection);
             con.Open();
@@ -219,15 +219,59 @@ namespace STEAM_DB
                 CommandText = sql
             };
 
-            object? obj = cmd.ExecuteScalar();
+            NpgsqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+                prevId = reader.GetInt32(0);
 
-            if (obj != null)
+            return prevId + 1;
+        }
+
+        internal static bool CheckToReturnTheGame(string gameName, ref int gameId)
+        {
+            GetID(gameName, ref gameId);
+            int userId = Global.user.UserId;
+
+            NpgsqlConnection con = new(connection); 
+            con.Open();
+            NpgsqlCommand cmd = new()
             {
-                prevId = (int)(long)obj;
-                return prevId + 1;
-            }
+                Connection = con,
+                CommandText = $"select date from purchases where game_id = {gameId} and user_id = {userId};"
+            };
+            NpgsqlDataReader reader = cmd.ExecuteReader();
+
+            string data = string.Empty;
+            while(reader.Read())
+                data = reader.GetString(0);
+
+            // сегодняшняя дата
+            DateTime timeToday = DateTime.Today;
+            // дата покупки
+            DateTime timePurchase = Convert.ToDateTime(data);
+            // разность дат
+            TimeSpan timeDif = timeToday.Subtract(timePurchase);
+            // количество дней со дня покупки
+            int days = timeDif.Days;
+            if (days <= 14) // если прошло меньше двух недель, даём добро на возврат
+                return true;
             else
-                return 1;
+                return false;
+        }
+
+        internal static void ReturnGame(int gameId)
+        {
+            int userId = Global.user.UserId;
+
+            using SteamContext context = new(options);
+            // получаем объект из базы данных
+            var purchase = context.Purchases.SingleOrDefault(x => x.GameId == gameId && x.UserId == userId);
+            if (purchase != null)
+            {
+                // удаляем и сохраняем изменения
+                context.Purchases.Remove(purchase);
+                context.SaveChanges();
+            }
+            context.Dispose();
         }
     }
 }
