@@ -51,6 +51,7 @@ namespace STEAM_DB
                     MessageBox.Show("Игра успешно возвращена");
 
                     PersonalAccountWindow.listPage[PersonalAccountWindow.indxPurchase] = new PagePurchase();
+                    Load();
                 }
                 else
                     MessageBox.Show("Нельзя вернуть игру (прошло более двух недель)", "Error!", MessageBoxButton.OK, MessageBoxImage.Error);

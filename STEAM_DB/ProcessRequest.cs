@@ -206,6 +206,22 @@ namespace STEAM_DB
             context.Dispose();
         }
 
+        internal static void RemoveFromWishlist(in string gameName, ref int gameID) // убрать из избранного
+        {
+            GetID(gameName, ref gameID);
+            int gameId = gameID;
+            int userId = Global.user.UserId;    
+
+            using SteamContext context = new(options);
+            var wishlist = context.Wishlists.SingleOrDefault(x => x.GameId == gameId && x.UserId == userId);
+            if (wishlist != null)
+            {
+                context.Wishlists.Remove(wishlist);
+                context.SaveChanges();
+            }
+            context.Dispose();
+        }
+
         private static int GetNextID(in string sql) // получаем следующее айди 
         {
             int prevId = 0;
@@ -226,7 +242,7 @@ namespace STEAM_DB
             return prevId + 1;
         }
 
-        internal static bool CheckToReturnTheGame(string gameName, ref int gameId)
+        internal static bool CheckToReturnTheGame(string gameName, ref int gameId) // проверка возможности возврата игры
         {
             GetID(gameName, ref gameId);
             int userId = Global.user.UserId;
@@ -258,7 +274,7 @@ namespace STEAM_DB
                 return false;
         }
 
-        internal static void ReturnGame(int gameId)
+        internal static void ReturnGame(int gameId) // возврат игры
         {
             int userId = Global.user.UserId;
 

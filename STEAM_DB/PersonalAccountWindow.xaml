@@ -29,7 +29,7 @@
                     <Button Name="wishlistButton" Style="{StaticResource MaterialDesignFlatLightBgButton}" Content="Избранное" FontSize="24" Height="70" Width="182" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" Click="WishlistButton_Click"/>
                 </Menu>
                 <Rectangle Grid.Row="1" Height="30" Fill="#FF655555" VerticalAlignment="Top"></Rectangle>
-                <Frame Grid.Row="1" Name="PersonalAccountFrame">
+                <Frame Grid.Row="1" Name="PersonalAccountFrame" NavigationUIVisibility="Hidden">
                 </Frame>
             </Grid>
         </Border>
