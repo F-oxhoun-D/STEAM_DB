@@ -9,7 +9,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="export.png" />
     <None Remove="steam_icon_188906.ico" />
+    <None Remove="_logout_.ico" />
   </ItemGroup>
 
   <ItemGroup>
@@ -24,6 +26,7 @@
 
   <ItemGroup>
     <Resource Include="steam_icon_188906.ico" />
+    <Resource Include="_logout_.ico" />
   </ItemGroup>
 
   <ItemGroup>

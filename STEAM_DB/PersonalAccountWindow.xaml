@@ -6,9 +6,9 @@
         xmlns:local="clr-namespace:STEAM_DB"
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-            Title="STEAM" Height="550" Width="1000" WindowStartupLocation="CenterScreen" Background="#FF14141F" BorderBrush="#FF14141F" Foreground="#FF14141F" WindowStyle="ThreeDBorderWindow" ResizeMode="CanMinimize" Icon="/steam_icon_188906.ico">
+            Title="STEAM" Height="550" Width="1000" WindowStartupLocation="CenterScreen" Background="#FF14141F" BorderBrush="#FF14141F" Foreground="#FF14141F" WindowStyle="ThreeDBorderWindow" ResizeMode="CanMinimize" Icon="/steam_icon_188906.ico" Closing="Window_Closing">
     <Window.Resources>
-       
+
     </Window.Resources>
     <Grid Background="#FF1D1D2D">
         <Border>
@@ -25,8 +25,11 @@
                 </Border>
                 <Menu Grid.Row="0" Background="#FF14141F" Height="100" Width="700" VerticalAlignment="Top" HorizontalAlignment="Right">
                     <Button Name="gameButton" Style="{StaticResource MaterialDesignFlatLightBgButton}" Content="Игры" FontSize="24" Height="70" Width="182" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" Click="GameButton_Click"/>
-                    <Button Name="purchaseButton" Style="{StaticResource MaterialDesignFlatLightBgButton}" Content="Покупки" FontSize="24" Height="70" Width="182" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" VerticalAlignment="Top" Click="PurchaseButton_Click"/>
-                    <Button Name="wishlistButton" Style="{StaticResource MaterialDesignFlatLightBgButton}" Content="Избранное" FontSize="24" Height="70" Width="182" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" Click="WishlistButton_Click"/>
+                    <Button Name="purchaseButton" Style="{StaticResource MaterialDesignFlatLightBgButton}" Content="Покупки" FontSize="24" Height="70" Width="167" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" VerticalAlignment="Top" Click="PurchaseButton_Click"/>
+                    <Button Name="wishlistButton" Style="{StaticResource MaterialDesignFlatLightBgButton}" Content="Избранное" FontSize="24" Height="70" Width="170" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" Click="WishlistButton_Click"/>
+                    <Button Name="logoutButton" Style="{StaticResource MaterialDesignFlatButton}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Width="51" Height="50" Click="LogoutButton_Click" >
+                        <Image Source="/_logout_.ico"></Image>
+                    </Button>
                 </Menu>
                 <Rectangle Grid.Row="1" Height="30" Fill="#FF655555" VerticalAlignment="Top"></Rectangle>
                 <Frame Grid.Row="1" Name="PersonalAccountFrame" NavigationUIVisibility="Hidden">

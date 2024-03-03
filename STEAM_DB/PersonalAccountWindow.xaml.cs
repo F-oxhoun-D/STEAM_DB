@@ -1,16 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace STEAM_DB
 {
@@ -50,11 +39,32 @@ namespace STEAM_DB
 
         private void Load()
         {
+            if (listPage.Count != 0)
+                listPage.Clear();
+
             userLabel.Content = Global.user.Username.ToString();
             // добавляем в список каждую страницу
             listPage.Add(new PageGame());
             listPage.Add(new PagePurchase());
             listPage.Add(new PageWishlist());
+        }
+
+        private void LogoutButton_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show("Покинуть личный кабинет?", "", MessageBoxButton.YesNo, MessageBoxImage.Information);
+            switch (result)
+            {
+                case MessageBoxResult.Yes:
+                    Close();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            Global.user = new();
         }
     }
 }

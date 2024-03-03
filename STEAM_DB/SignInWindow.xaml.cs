@@ -26,18 +26,22 @@ namespace STEAM_DB
 
         private void ButtonSignIn_Click(object sender, RoutedEventArgs e)
         {
+            string[] sep = [" ", ",", ".", "/"];
+            string strUserName = string.Join("", textBoxUserName.Text.Split(sep, StringSplitOptions.RemoveEmptyEntries));
+            string strPassword = string.Join("", passwordBox.Password.ToString().Split(sep, StringSplitOptions.RemoveEmptyEntries));
+
             string errorMessage = "Заполните поля!";
-            if (textBoxUserName.Text != null)
+            if (strUserName != "")
             {
-                if (passwordBox.Password.ToString() != null)
+                if (strPassword != "")
                 {
-                    string password = Hash.GetHash(passwordBox.Password.ToString());
-                    bool result = Authentication.CheckThePassword(textBoxUserName.Text, password);
+                    string password = Hash.GetHash(strPassword);
+                    bool result = Authentication.CheckThePassword(strUserName, password);
                     if (result)
                     {
                         MessageBox.Show("Вы успешно вошли в систему!");
                         Close();
-                        Authentication.GetUser(textBoxUserName.Text, password);
+                        Authentication.GetUser(strUserName, password);
                         PersonalAccountWindow window = new();
                         window.ShowDialog();
                     }
