@@ -26,28 +26,34 @@ namespace STEAM_DB
                 {
                     if (strPassword != "")
                     {
-                        bool result = Authorization.QueryCheckAvailability(strEmail);
-                        if (!result)
+                        bool checkUserName = Authorization.CheckUserName(strUserName);
+                        if (!checkUserName)
                         {
-                            // поучаем хеш пароля
-                            string passwordHash = Hash.GetHash(strPassword);
-                            // сегодняшняя дата
-                            DateTime date = DateTime.Today;
-                            // конвертируем в строку вида yyyy-MM-dd
-                            string dateString = date.ToString("yyyy-MM-dd");
-                            // передача параметров в метод AddUserInDB класса AuthorizationDB
-                            Authorization.AddUserInDB(strUserName, strEmail, passwordHash, dateString);
-                            MessageBox.Show("Регистрация прошла успешно!");
-                            // закрываем окно регистрации
-                            Close();
-                            // получаем пользователя, под которым входим в систему
-                            Authentication.GetUser(strUserName, passwordHash);
-                            // открываем окно личного кабинета
-                            PersonalAccountWindow window = new();
-                            window.ShowDialog();
+                            bool checkEmail = Authorization.CheckEmail(strEmail);
+                            if (!checkEmail)
+                            {
+                                // поучаем хеш пароля
+                                string passwordHash = Hash.GetHash(strPassword);
+                                // сегодняшняя дата
+                                DateTime date = DateTime.Today;
+                                // конвертируем в строку вида yyyy-MM-dd
+                                string dateString = date.ToString("yyyy-MM-dd");
+                                // передача параметров в метод AddUserInDB класса AuthorizationDB
+                                Authorization.AddUserInDB(strUserName, strEmail, passwordHash, dateString);
+                                MessageBox.Show("Регистрация прошла успешно!");
+                                // закрываем окно регистрации
+                                Close();
+                                // получаем пользователя, под которым входим в систему
+                                Authentication.GetUser(strUserName, passwordHash);
+                                // открываем окно личного кабинета
+                                PersonalAccountWindow window = new();
+                                window.ShowDialog();
+                            }
+                            else
+                                MessageBox.Show("Данная почта уже существует!");
                         }
                         else
-                            MessageBox.Show("Данная почта уже существует!");
+                            MessageBox.Show("Данное имя занято!");
                     }
                     else
                         MessageBox.Show(errorMessage);

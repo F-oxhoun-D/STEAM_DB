@@ -4,12 +4,41 @@ namespace STEAM_DB
 {
     internal class Authorization: ConnectionToDataBase
     {
-        public static bool QueryCheckAvailability(string param) // проверка наличия в базе данных пользователя с данной почтой
+        public static bool CheckUserName(string userName)
+        {
+            /*using NpgsqlConnection con = new(ConnectionString);
+            con.Open();
+            NpgsqlCommand cmd = new()
+            {
+                Connection = con,
+                CommandText = $"select count(username) from users where username = {userName};"
+            };
+            int count = -1;
+            object? obj = cmd.ExecuteScalar();
+
+            con.Dispose();
+            con.Close();
+
+            if (obj != null)
+                count = (int)(long)obj;
+            if (count > 0)
+                return false;
+            else
+                return true;*/
+
+            
+            using SteamContext context = new(ConnectionStringOptions);
+            bool result = context.Users.Any(u => u.Username == userName);
+            context.Dispose();
+            return result;
+        }
+
+        public static bool CheckEmail(string email) // проверка наличия в базе данных пользователя с данной почтой
         {
             // получаем строку подключения
             using SteamContext context = new (ConnectionStringOptions);
             // проверяем наличия пользователя с заданной почтой
-            bool result = context.Users.Any(u => u.Email == param);
+            bool result = context.Users.Any(u => u.Email == email);
             return result;
         }
 
