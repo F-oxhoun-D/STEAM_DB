@@ -283,7 +283,7 @@ namespace STEAM_DB
             context.Dispose();
         }
 
-        internal static DataView SQLQuery(string sql)
+        internal static DataView SQLQuery(string sql) // обработка любого запроса админа
         {
             using NpgsqlConnection con = new (connection);
             con.Open();

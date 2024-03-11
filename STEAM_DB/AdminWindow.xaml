@@ -26,7 +26,7 @@
                 </TextBox>
                 <Button Name="buttonRun" Grid.Row="0" Width="110" Height="70" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,140,0" Content="Выполнить" Background="#FF14141F" BorderBrush="#FF4C4C72" Click="ButtonRun_Click"/>
                 <Button Name="buttonClear" Grid.Row="0" Width="110" Height="70" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,20,0" Content="Очистить" Background="#FF14141F" BorderBrush="#FF4C4C72" Click="ButtonClear_Click"/>
-                <DataGrid x:Name="queryGrid" AutoGenerateColumns="True" Grid.Row="1" Background="{x:Null}" Foreground="White" IsReadOnly="True">
+                <DataGrid Name="queryGrid" AutoGenerateColumns="True" Grid.Row="1" Background="{x:Null}" Foreground="White" IsReadOnly="True">
                 </DataGrid>
             </Grid>
         </Border>

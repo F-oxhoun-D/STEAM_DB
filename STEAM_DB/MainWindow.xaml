@@ -31,7 +31,7 @@
                     <Button Name="signInButton" Style="{StaticResource MaterialDesignFlatLightBgButton}" Content="Вход" FontSize="24" Height="70" Width="182" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" VerticalAlignment="Top" Click="SignInButton_Click"/>
                     <Button Name="signUpButton" Style="{StaticResource MaterialDesignFlatLightBgButton}" Content="Регистрация" FontSize="24" Height="70" Width="182" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" Click="SignUpButton_Click"/>
                 </Menu>
-                <DataGrid x:Name="gamesGrid" AutoGenerateColumns="True" Grid.Row="1" Background="{x:Null}" Foreground="White" IsReadOnly="True">
+                <DataGrid Name="gamesGrid" AutoGenerateColumns="True" Grid.Row="1" Background="{x:Null}" Foreground="White" IsReadOnly="True">
                 </DataGrid>
             </Grid>
         </Border>
