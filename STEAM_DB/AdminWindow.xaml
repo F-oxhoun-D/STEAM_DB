@@ -20,11 +20,12 @@
                     <RowDefinition Height="100"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <TextBox Grid.Row="0" Width="700" Height="70" HorizontalAlignment="Left" Background="#FF655555" VerticalAlignment="Center" 
+                <TextBox Name="textBoxSQLQuery" Grid.Row="0" Width="700" Height="70" HorizontalAlignment="Left" Background="#FF655555" VerticalAlignment="Center" 
                          materialDesign:HintAssist.Hint="Введите запрос" materialDesign:HintAssist.Background="#FF655555" materialDesign:HintAssist.Foreground="White" Style="{StaticResource MaterialDesignOutlinedTextBox}" SelectionTextBrush="#FF655555" BorderBrush="#FF4C4C72" CaretBrush="#FF6D5DE0" Foreground="White" SelectionBrush="#FF4B50FC" Margin="10,0,0,0"
                          AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Visible" FontSize="18">
                 </TextBox>
-                <Button Name="buttonRun" Grid.Row="0" Width="110" Height="70" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,20,0" Content="Выполнить" Background="#FF14141F" BorderBrush="#FF4C4C72" Click="ButtonRun_Click"/>
+                <Button Name="buttonRun" Grid.Row="0" Width="110" Height="70" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,140,0" Content="Выполнить" Background="#FF14141F" BorderBrush="#FF4C4C72" Click="ButtonRun_Click"/>
+                <Button Name="buttonClear" Grid.Row="0" Width="110" Height="70" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,20,0" Content="Очистить" Background="#FF14141F" BorderBrush="#FF4C4C72" Click="ButtonClear_Click"/>
                 <DataGrid x:Name="queryGrid" AutoGenerateColumns="True" Grid.Row="1" Background="{x:Null}" Foreground="White" IsReadOnly="True">
                 </DataGrid>
             </Grid>

@@ -1,12 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Npgsql;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Security.Cryptography.Pkcs;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace STEAM_DB
 {
@@ -54,7 +48,6 @@ namespace STEAM_DB
 
         internal static DataView GetListOfPurchase(in int id) // список покупок
         {
-            List<string[]> list = [];
             using NpgsqlConnection con = new(connection);
             con.Open();
             NpgsqlCommand cmd = new()
@@ -288,6 +281,25 @@ namespace STEAM_DB
                 context.SaveChanges();
             }
             context.Dispose();
+        }
+
+        internal static DataView SQLQuery(string sql)
+        {
+            using NpgsqlConnection con = new (connection);
+            con.Open();
+
+            NpgsqlCommand cmd = new()
+            {
+                Connection = con,
+                CommandText = sql
+            };
+            cmd.ExecuteNonQuery();
+            NpgsqlDataAdapter dataAdapter = new(cmd);
+            DataTable dt = new();
+            dataAdapter.Fill(dt);
+            con.Dispose();
+            con.Close();
+            return dt.DefaultView;
         }
     }
 }
