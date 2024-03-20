@@ -10,7 +10,7 @@ namespace STEAM_DB
         public MainWindow()
         {
             InitializeComponent();
-            ConnectionToDataBase.GetConnectionString();
+            _ = ConnectionToDataBase.Instance;
         }
 
         private void GameButton_Click(object sender, RoutedEventArgs e)

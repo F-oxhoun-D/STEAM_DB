@@ -3,7 +3,7 @@ using Npgsql;
 
 namespace STEAM_DB
 {
-    internal class Authorization: ConnectionToDataBase
+    internal class Authorization
     {
         public static bool CheckUserName(string userName)
         {
@@ -28,7 +28,7 @@ namespace STEAM_DB
                 return true;*/
 
             
-            using SteamContext context = new(ConnectionStringOptions);
+            using SteamContext context = new(ConnectionToDataBase.ConnectionStringOptions);
             bool result = context.Users.Any(u => u.Username == userName);
             context.Dispose();
             return result;
@@ -37,7 +37,7 @@ namespace STEAM_DB
         public static bool CheckEmail(string email) // проверка наличия в базе данных пользователя с данной почтой
         {
             // получаем строку подключения
-            using SteamContext context = new (ConnectionStringOptions);
+            using SteamContext context = new (ConnectionToDataBase.ConnectionStringOptions);
             // проверяем наличия пользователя с заданной почтой
             bool result = context.Users.Any(u => u.Email == email);
             return result;
@@ -49,7 +49,7 @@ namespace STEAM_DB
             // создание пользователя
             User user = new() { UserId = Id, Username = name, Email = email, Password = password, Registration = date};
             // создание объекта контекста данных
-            using SteamContext context = new (ConnectionStringOptions);
+            using SteamContext context = new (ConnectionToDataBase.ConnectionStringOptions);
             // добавляем в бд
             context.Users.Add(user);
             // сохраняем изменения
@@ -60,7 +60,7 @@ namespace STEAM_DB
         {
             int prevId = 0;
 
-            using NpgsqlConnection con = new(ConnectionString);
+            using NpgsqlConnection con = new(ConnectionToDataBase.ConnectionString);
             con.Open();
             NpgsqlCommand cmd = new()
             {
@@ -77,13 +77,5 @@ namespace STEAM_DB
             return prevId + 1;
         }
 
-        private static int GetNextId() // получаем следующий айди для заполнения в бд
-        {
-            int prevId = 0;
-
-            
-
-            return prevId + 1;
-        }
     }
 }
