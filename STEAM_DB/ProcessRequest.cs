@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Npgsql;
 using System.Data;
+using System.Data.Common;
 
 namespace STEAM_DB
 {
@@ -22,7 +23,7 @@ namespace STEAM_DB
             return gamesSort;
         }*/
 
-        internal static DataView GetListOfGames() // получение списка игр
+        /*internal static DataView GetListOfGames() // получение списка игр
         { 
             // подключение к бд
             using NpgsqlConnection con = new(ConnectionToDataBase.ConnectionString);
@@ -44,9 +45,22 @@ namespace STEAM_DB
             con.Close();
             // возвращяем объект
             return dt.DefaultView;
+        }*/
+
+        internal static IEnumerable<dynamic> GetListOfGames() // получение списка игр
+        {
+            using SteamContext context = new (options);
+            var games = context.Games.Join(context.Developers, g => g.DeveloperId, d => d.DeveloperId,
+                (g, d) => new
+                {
+                    g.Title,
+                    g.Description,
+                    d.Developername
+                }).ToList();
+            return games;
         }
 
-        internal static DataView GetListOfPurchase(in int id) // список покупок
+        internal static DataView GetListOfPurchases(in int id) // список покупок
         {
             using NpgsqlConnection con = new(connection);
             con.Open();
@@ -62,6 +76,19 @@ namespace STEAM_DB
             con.Dispose();
             con.Close();
             return dt.DefaultView;
+        }
+
+        internal static IEnumerable<dynamic> GetListOfPurchasee(int id) // список покупок
+        {
+            using SteamContext context = new (options);
+            /*var purchases = context.Purchases.Join(context.Games, p => p.GameId, g => g.GameId,
+                (p, g) => new
+                {
+                    g.Title,
+                    p.PurchaseDate
+                }).ToList();*/
+            var purchases = context.Purchases.Include(p => p.Game.GameId).OrderBy(p => p.PurchaseId).Where(p => p.UserId == id).ToList();    
+            return purchases;
         }
 
         internal static List<string> GetListOfWishlist(in int id) // список избранного

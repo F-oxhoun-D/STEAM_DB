@@ -1,4 +1,5 @@
-﻿using Npgsql;
+﻿using Microsoft.EntityFrameworkCore;
+using Npgsql;
 
 namespace STEAM_DB
 {
@@ -72,6 +73,15 @@ namespace STEAM_DB
 
             con.Dispose();
             con.Close();
+
+            return prevId + 1;
+        }
+
+        private static int GetNextId() // получаем следующий айди для заполнения в бд
+        {
+            int prevId = 0;
+
+            
 
             return prevId + 1;
         }

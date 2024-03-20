@@ -29,7 +29,7 @@ namespace STEAM_DB
 
         private void Load()
         {
-            purchasesGrid.ItemsSource = ProcessRequest.GetListOfPurchase(Global.user.UserId); 
+            purchasesGrid.ItemsSource = ProcessRequest.GetListOfPurchases(Global.user.UserId); 
         }
 
         private void ButtonReturnTheGame_Click(object sender, RoutedEventArgs e)

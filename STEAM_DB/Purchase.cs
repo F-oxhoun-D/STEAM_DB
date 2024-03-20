@@ -13,7 +13,7 @@ public partial class Purchase
 
     public int? UserId { get; set; }
 
-    public Game? Game { get; set; }
+    public Game Game { get; set; } = null!;
 
     public User? User { get; set; }
 }
