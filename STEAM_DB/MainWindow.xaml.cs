@@ -10,7 +10,7 @@ namespace STEAM_DB
         public MainWindow()
         {
             InitializeComponent();
-            _ = ConnectionToDataBase.Instance;
+            _ = ConnectionToDataBase.Connection;
         }
 
         private void GameButton_Click(object sender, RoutedEventArgs e)
@@ -24,13 +24,13 @@ namespace STEAM_DB
 
         private void SignUpButton_Click(object sender, RoutedEventArgs e)
         {
-            SignUpWindow signUpWindow = new ();
+            SignUpWindow signUpWindow = new();
             signUpWindow.ShowDialog();
         }
 
         private void SignInButton_Click(object sender, RoutedEventArgs e)
         {
-            SignInWindow signInWindow = new ();
+            SignInWindow signInWindow = new();
             signInWindow.ShowDialog();
         }
     }

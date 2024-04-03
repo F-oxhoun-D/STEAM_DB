@@ -13,18 +13,18 @@ namespace STEAM_DB
         public static DbContextOptions<SteamContext> ConnectionStringOptions { get; set; } = null!;
 
         // экземпляр класса
-        private static ConnectionToDataBase? _instance;
+        private static ConnectionToDataBase? connection;
 
         // свойство
-        public static ConnectionToDataBase Instance
+        public static ConnectionToDataBase Connection
         {
             // получаем значение
             get
             {
                 // если экземпляр равен null, создаём новый объект
-                _instance ??= new ConnectionToDataBase();
+                connection ??= new ConnectionToDataBase();
                 // иначе возвращаем уже созданный
-                return _instance;
+                return connection;
                 // это средство доступа - единственный способ получить доступ к Singleton экземпляру
                 // защита от созданий множества экземпляров класса ConnectionToDataBase
             }
@@ -32,10 +32,10 @@ namespace STEAM_DB
 
         private ConnectionToDataBase()
         {
-            Connection();
+            Connect();
         }
 
-        private static void Connection()
+        private static void Connect()
         {
             var builder = new ConfigurationBuilder();
             // установка пути к текущему каталогу

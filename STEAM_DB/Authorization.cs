@@ -43,6 +43,18 @@ namespace STEAM_DB
             return result;
         }
 
+        public static bool ValidEmail(string email)
+        {
+            string separator = "@";
+            string[] emailAddres = email.Split(separator);
+            if (emailAddres.Length != 2) return false;
+            else
+            {
+                string[] serverName = emailAddres[1].Split(".");
+                return serverName.Length == 2;
+            }
+        }
+
         public static void AddUserInDB(string name, string email, string password, string date)
         {
             int Id = GetNextID();

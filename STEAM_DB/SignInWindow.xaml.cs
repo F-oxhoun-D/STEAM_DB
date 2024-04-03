@@ -19,6 +19,11 @@ namespace STEAM_DB
     /// </summary>
     public partial class SignInWindow : Window
     {
+        static readonly string[] sep = [" ", ",", "/"];
+        static string userName = null!;
+        static string password = null!;
+        static readonly string errorMessage = "Заполните поля!";
+
         public SignInWindow()
         {
             InitializeComponent();
@@ -26,23 +31,22 @@ namespace STEAM_DB
 
         private void ButtonSignIn_Click(object sender, RoutedEventArgs e)
         {
-            string[] sep = [" ", ",", ".", "/"];
-            string strUserName = string.Join("", textBoxUserName.Text.Split(sep, StringSplitOptions.RemoveEmptyEntries));
-            string strPassword = string.Join("", passwordBox.Password.ToString().Split(sep, StringSplitOptions.RemoveEmptyEntries));
+            userName = string.Join("", textBoxUserName.Text.Split(sep, StringSplitOptions.RemoveEmptyEntries));
+            password = string.Join("", passwordBox.Password.ToString().Split(sep, StringSplitOptions.RemoveEmptyEntries));
 
             string errorMessage = "Заполните поля!";
-            if (strUserName != "")
+            if (userName != "")
             {
-                if (strPassword != "")
+                if (password != "")
                 {
-                    string password = Hash.GetHash(strPassword);
-                    bool result = Authentication.CheckThePassword(strUserName, password);
+                    string passwordHash = Hash.GetHash(password);
+                    bool result = Authentication.CheckThePassword(userName, passwordHash);
                     if (result)
                     {
                         MessageBox.Show("Вы успешно вошли в систему!");
                         Close();
-                        Authentication.GetUser(strUserName, password);
-                        if (strUserName == "admin")
+                        Authentication.GetUser(userName, passwordHash);
+                        if (userName == "admin")
                         {
                             AdminWindow adminWindow = new ();
                             adminWindow.ShowDialog();
@@ -53,14 +57,11 @@ namespace STEAM_DB
                             window.ShowDialog();
                         }
                     }
-                    else
-                        MessageBox.Show("Данные не верны!");
+                    else MessageBox.Show("Данные не верны!");
                 }
-                else
-                    MessageBox.Show(errorMessage);
+                else MessageBox.Show(errorMessage);
             }
-            else
-                MessageBox.Show(errorMessage);
+            else MessageBox.Show(errorMessage);
         }
     }
 }
