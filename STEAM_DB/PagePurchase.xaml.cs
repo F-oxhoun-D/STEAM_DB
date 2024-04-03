@@ -1,18 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.ConstrainedExecution;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace STEAM_DB
 {
@@ -29,7 +16,7 @@ namespace STEAM_DB
 
         private void Load()
         {
-            purchasesGrid.ItemsSource = ProcessRequest.GetListOfPurchases(Global.user.UserId); 
+            purchasesGrid.ItemsSource = ProcessRequest.GetListOfPurchases(Global.user.UserId);
         }
 
         private void ButtonReturnTheGame_Click(object sender, RoutedEventArgs e)
@@ -55,11 +42,11 @@ namespace STEAM_DB
                 }
                 else
                     MessageBox.Show("Нельзя вернуть игру (прошло более двух недель)", "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
-                
+
             }
             else
                 MessageBox.Show("Выберите игру");
-            
+
         }
     }
 }

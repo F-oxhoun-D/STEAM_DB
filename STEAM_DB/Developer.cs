@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace STEAM_DB;
+﻿namespace STEAM_DB;
 
 public partial class Developer
 {

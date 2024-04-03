@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Npgsql;
 using System.Data;
-using System.Data.Common;
 
 namespace STEAM_DB
 {
@@ -49,7 +48,7 @@ namespace STEAM_DB
 
         internal static IEnumerable<dynamic> GetListOfGames() // получение списка игр
         {
-            using SteamContext context = new (options);
+            using SteamContext context = new(options);
             var games = context.Games.Join(context.Developers, g => g.DeveloperId, d => d.DeveloperId,
                 (g, d) => new
                 {
@@ -70,7 +69,7 @@ namespace STEAM_DB
                 CommandText = $"select g.title, p.date from games g join purchases p on g.game_id = p.game_id and p.user_id = {id};"
             };
             cmd.ExecuteNonQuery();
-            NpgsqlDataAdapter dataAdapter = new (cmd);
+            NpgsqlDataAdapter dataAdapter = new(cmd);
             DataTable dt = new("Games");
             dataAdapter.Fill(dt);
             con.Dispose();
@@ -80,14 +79,14 @@ namespace STEAM_DB
 
         internal static IEnumerable<dynamic> GetListOfPurchasee(int id) // список покупок
         {
-            using SteamContext context = new (options);
+            using SteamContext context = new(options);
             /*var purchases = context.Purchases.Join(context.Games, p => p.GameId, g => g.GameId,
                 (p, g) => new
                 {
                     g.Title,
                     p.PurchaseDate
                 }).ToList();*/
-            var purchases = context.Purchases.Include(p => p.Game.GameId).OrderBy(p => p.PurchaseId).Where(p => p.UserId == id).ToList();    
+            var purchases = context.Purchases.Include(p => p.Game.GameId).OrderBy(p => p.PurchaseId).Where(p => p.UserId == id).ToList();
             return purchases;
         }
 
@@ -179,7 +178,7 @@ namespace STEAM_DB
 
             int userId = Global.user.UserId;
 
-            Purchase purchase = new() { PurchaseId = Id, PurchaseDate =  dateString, GameId = gameId, UserId = userId };
+            Purchase purchase = new() { PurchaseId = Id, PurchaseDate = dateString, GameId = gameId, UserId = userId };
 
             using SteamContext context = new(options);
             context.Purchases.Add(purchase);
@@ -218,11 +217,11 @@ namespace STEAM_DB
             int Id = GetNextID(sql);
 
             int userId = Global.user.UserId;
-            Wishlist wishlist = new() { WishlistId = Id, UserId = userId, GameId = gameId};
+            Wishlist wishlist = new() { WishlistId = Id, UserId = userId, GameId = gameId };
 
             using SteamContext context = new(options);
             context.Wishlists.Add(wishlist);
-            context.SaveChanges();  
+            context.SaveChanges();
             context.Dispose();
         }
 
@@ -230,7 +229,7 @@ namespace STEAM_DB
         {
             GetID(gameName, ref gameID);
             int gameId = gameID;
-            int userId = Global.user.UserId;    
+            int userId = Global.user.UserId;
 
             using SteamContext context = new(options);
             var wishlist = context.Wishlists.SingleOrDefault(x => x.GameId == gameId && x.UserId == userId);
@@ -267,7 +266,7 @@ namespace STEAM_DB
             GetID(gameName, ref gameId);
             int userId = Global.user.UserId;
 
-            NpgsqlConnection con = new(connection); 
+            NpgsqlConnection con = new(connection);
             con.Open();
             NpgsqlCommand cmd = new()
             {
@@ -277,7 +276,7 @@ namespace STEAM_DB
             NpgsqlDataReader reader = cmd.ExecuteReader();
 
             string data = string.Empty;
-            while(reader.Read())
+            while (reader.Read())
                 data = reader.GetString(0);
 
             // сегодняшняя дата
@@ -312,7 +311,7 @@ namespace STEAM_DB
 
         internal static DataView SQLQuery(string sql) // обработка любого запроса админа
         {
-            using NpgsqlConnection con = new (connection);
+            using NpgsqlConnection con = new(connection);
             con.Open();
 
             NpgsqlCommand cmd = new()

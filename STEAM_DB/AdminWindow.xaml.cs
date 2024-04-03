@@ -33,7 +33,7 @@ namespace STEAM_DB
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            Global.user = new ();
+            Global.user = new();
         }
     }
 }

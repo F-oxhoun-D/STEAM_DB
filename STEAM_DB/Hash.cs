@@ -12,7 +12,7 @@ namespace STEAM_DB
             // получаем хэш в виде массива байтов
             byte[] hash1 = MD5.HashData(inputBytes);
             // преобразуем хэш из массива в строку, состоящую из шестнадцатеричных символов в верхнем регистре
-            return Convert.ToHexString(hash1); 
+            return Convert.ToHexString(hash1);
         }
     }
 }

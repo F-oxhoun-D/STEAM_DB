@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Npgsql;
+﻿using Npgsql;
 
 namespace STEAM_DB
 {
@@ -27,7 +26,7 @@ namespace STEAM_DB
             else
                 return true;*/
 
-            
+
             using SteamContext context = new(ConnectionToDataBase.ConnectionStringOptions);
             bool result = context.Users.Any(u => u.Username == userName);
             context.Dispose();
@@ -37,7 +36,7 @@ namespace STEAM_DB
         public static bool CheckEmail(string email) // проверка наличия в базе данных пользователя с данной почтой
         {
             // получаем строку подключения
-            using SteamContext context = new (ConnectionToDataBase.ConnectionStringOptions);
+            using SteamContext context = new(ConnectionToDataBase.ConnectionStringOptions);
             // проверяем наличия пользователя с заданной почтой
             bool result = context.Users.Any(u => u.Email == email);
             return result;
@@ -59,9 +58,9 @@ namespace STEAM_DB
         {
             int Id = GetNextID();
             // создание пользователя
-            User user = new() { UserId = Id, Username = name, Email = email, Password = password, Registration = date};
+            User user = new() { UserId = Id, Username = name, Email = email, Password = password, Registration = date };
             // создание объекта контекста данных
-            using SteamContext context = new (ConnectionToDataBase.ConnectionStringOptions);
+            using SteamContext context = new(ConnectionToDataBase.ConnectionStringOptions);
             // добавляем в бд
             context.Users.Add(user);
             // сохраняем изменения

@@ -7,7 +7,7 @@ namespace STEAM_DB
     /// Логика взаимодействия для PersonalAccountWindow.xaml
     /// </summary>
     public partial class PersonalAccountWindow : Window
-    { 
+    {
         // список, хранящий страницы
         public static readonly List<Page> listPage = [];
         // индексы страниц

@@ -1,6 +1,6 @@
-﻿using System.IO;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using System.IO;
 
 namespace STEAM_DB;
 
@@ -18,11 +18,11 @@ public partial class SteamContext : DbContext
     // файл логгирования (логгирование помогает нам контролировать все операции в приложении)
     private readonly StreamWriter logStream = new("mylog.txt", true);
 
-    public  DbSet<Developer> Developers { get; set; }
+    public DbSet<Developer> Developers { get; set; }
 
-    public  DbSet<Game> Games { get; set; }
+    public DbSet<Game> Games { get; set; }
 
-    public  DbSet<Genre> Genres { get; set; }
+    public DbSet<Genre> Genres { get; set; }
 
     public DbSet<Purchase> Purchases { get; set; }
 
