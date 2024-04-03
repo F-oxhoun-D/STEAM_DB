@@ -49,7 +49,6 @@ namespace STEAM_DB
                         PersonalAccountWindow window = new();
                         window.ShowDialog();
                     }
-                    Clear();
                 }
                 else MessageBox.Show("Данные не верны!");
             }
@@ -61,6 +60,7 @@ namespace STEAM_DB
                     passwordBox.BorderBrush = Brushes.Red;
                 MessageBox.Show(errorMessage);
             }
+            Clear();
         }
 
         private void TextBoxUserName_LostFocus(object sender, RoutedEventArgs e)

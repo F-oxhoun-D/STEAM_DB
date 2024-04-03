@@ -55,7 +55,6 @@ namespace STEAM_DB
                         Close();
                         // получаем пользователя, под которым входим в систему
                         Authentication.GetUser(userName, passwordHash);
-                        Clear();
                         // открываем окно личного кабинета
                         PersonalAccountWindow window = new();
                         window.ShowDialog();
@@ -74,6 +73,7 @@ namespace STEAM_DB
                     passwordBox.BorderBrush = Brushes.Red;
                 MessageBox.Show(errorMessage);
             }
+            Clear();
         }
 
         private void TextBoxUserName_LostFocus(object sender, RoutedEventArgs e)
