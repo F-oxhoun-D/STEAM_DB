@@ -20,6 +20,14 @@ namespace STEAM_DB
             InitializeComponent();
         }
 
+        private static void Clear()
+        {
+            CheckValidUserName = false;
+            CheckValidPassword = false;
+            userName = string.Empty;
+            password = string.Empty;
+        }
+
         private void ButtonSignIn_Click(object sender, RoutedEventArgs e)
         {
             if (CheckValidUserName && CheckValidPassword)
@@ -41,6 +49,7 @@ namespace STEAM_DB
                         PersonalAccountWindow window = new();
                         window.ShowDialog();
                     }
+                    Clear();
                 }
                 else MessageBox.Show("Данные не верны!");
             }

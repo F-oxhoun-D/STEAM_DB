@@ -22,6 +22,16 @@ namespace STEAM_DB
             InitializeComponent();
         }
 
+        private static void Clear()
+        {
+            CheckValidUserName = false;
+            CheckValidEmail = false;
+            CheckValidPassword = false;
+            userName = string.Empty;
+            email = string.Empty;
+            password = string.Empty;
+        }
+
         private void ButtonSignUp_Click(object sender, RoutedEventArgs e)
         {
             if (CheckValidUserName && CheckValidEmail && CheckValidEmail)
@@ -45,6 +55,7 @@ namespace STEAM_DB
                         Close();
                         // получаем пользователя, под которым входим в систему
                         Authentication.GetUser(userName, passwordHash);
+                        Clear();
                         // открываем окно личного кабинета
                         PersonalAccountWindow window = new();
                         window.ShowDialog();
