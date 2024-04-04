@@ -18,6 +18,7 @@ namespace STEAM_DB
         public SignInWindow()
         {
             InitializeComponent();
+            Clear();
         }
 
         private static void Clear()
@@ -60,10 +61,9 @@ namespace STEAM_DB
                     passwordBox.BorderBrush = Brushes.Red;
                 MessageBox.Show(errorMessage);
             }
-            Clear();
         }
 
-        private void TextBoxUserName_LostFocus(object sender, RoutedEventArgs e)
+        private void TextBoxUserName_LostFocus(object sender, RoutedEventArgs e) // возникает при окончании ввода текста
         {
             userName = string.Join("", textBoxUserName.Text.Split(sep, StringSplitOptions.RemoveEmptyEntries));
             if (userName != string.Empty)
