@@ -5,8 +5,8 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:STEAM_DB"
       mc:Ignorable="d" 
-      d:DesignHeight="450"
-      Title="PagePurchase" Width="1000" Height="434" ShowsNavigationUI="False">
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="PagePurchase" ShowsNavigationUI="False">
     <Page.Resources>
         <Style TargetType="DataGridColumnHeader">
             <Setter Property="Background" Value="#FF655555"/>
@@ -14,7 +14,7 @@
         </Style>
     </Page.Resources>
     <Grid>
-        <DataGrid x:Name="purchasesGrid" AutoGenerateColumns="True" Grid.Row="1" Background="{x:Null}" Foreground="White" IsReadOnly="True" Height="300" VerticalAlignment="Top">
+        <DataGrid x:Name="purchasesGrid" AutoGenerateColumns="True" Grid.Row="1" Background="{x:Null}" Foreground="White" IsReadOnly="True" VerticalAlignment="Top">
         </DataGrid>
         <Button x:Name="buttonReturnTheGame" Grid.Row="1" Content="Вернуть" Width="100" Height="40" Background="#FF14141F" BorderBrush="#FF4C4C72" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,70" Click="ButtonReturnTheGame_Click" />
     </Grid>

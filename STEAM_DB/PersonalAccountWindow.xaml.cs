@@ -37,12 +37,11 @@ namespace STEAM_DB
             PersonalAccountFrame.Content = listPage[indxWishlist];
         }
 
-        private void Load()
+        private static void Load()
         {
             if (listPage.Count != 0)
                 listPage.Clear();
 
-            userLabel.Content = Global.user.Username.ToString();
             // добавляем в список каждую страницу
             listPage.Add(new PageGame());
             listPage.Add(new PagePurchase());

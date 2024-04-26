@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:STEAM_DB"
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="STEAM" Height="550" Width="1000" WindowStartupLocation="CenterScreen" Background="#FF14141F" BorderBrush="#FF14141F" Foreground="#FF14141F" WindowStyle="ThreeDBorderWindow" ResizeMode="CanMinimize" Icon="/steam_icon_188906.ico">
+        Title="STEAM" Height="550" Width="1050" WindowStartupLocation="CenterScreen" Background="#FF14141F" BorderBrush="#FF14141F" Foreground="#FF14141F" WindowStyle="ThreeDBorderWindow" Icon="/steam_icon_188906.ico" MinWidth="1050" MinHeight="550">
     <Window.Resources>
         <Style TargetType="DataGridColumnHeader">
             <Setter Property="Background" Value="#FF655555"/>
@@ -20,16 +20,30 @@
                     <RowDefinition Height="100"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <Border Grid.Row="0" Margin="0,0,620,0" Background="#FF14141F">
-                    <Grid>
-                        <Image Source="/steam_icon_188906.ico" Margin="0,16,250,22"/>
-                        <Label Content="STEAM" Foreground="White" FontSize="24" Margin="108,16,172,45"/>
-                    </Grid>
-                </Border>
-                <Menu Grid.Row="0" Background="#FF14141F" Height="100" Width="700" VerticalAlignment="Top" HorizontalAlignment="Right">
-                    <Button Name="gameButton" Style="{StaticResource MaterialDesignFlatLightBgButton}" Content="Игры" FontSize="24" Height="70" Width="182" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" Click="GameButton_Click"/>
-                    <Button Name="signInButton" Style="{StaticResource MaterialDesignFlatLightBgButton}" Content="Вход" FontSize="24" Height="70" Width="182" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" VerticalAlignment="Top" Click="SignInButton_Click"/>
-                    <Button Name="signUpButton" Style="{StaticResource MaterialDesignFlatLightBgButton}" Content="Регистрация" FontSize="24" Height="70" Width="182" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" Click="SignUpButton_Click"/>
+               
+                <Menu Grid.Row="0" Background="#FF14141F">
+                    <Menu.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.3*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1.7*"/>
+                                </Grid.ColumnDefinitions>
+                            </Grid>
+                        </ItemsPanelTemplate>
+                    </Menu.ItemsPanel>
+                    <MenuItem Icon="" Foreground="White" Grid.Column="0" Margin="0,23,0,26" IsEnabled="False" Opacity="1">
+                        <MenuItem.Background>
+                            <ImageBrush ImageSource="/steam_icon_188906.ico" TileMode="Tile" Stretch="Uniform"/>
+                        </MenuItem.Background>
+                    </MenuItem>
+                    <MenuItem Grid.Column="1" Header="STEAM" IsEnabled="False" Foreground="White" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center" Opacity="1"/>
+                    <MenuItem Name="gameButton" Header="Игры" FontSize="24"  Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" Click="GameButton_Click" Grid.Column="2" HorizontalAlignment="Center"/>
+                    <MenuItem Name="signInButton" Header="Вход" FontSize="24"  Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" Click="SignInButton_Click" Grid.Column="3" HorizontalAlignment="Center"/>
+                    <MenuItem Name="signUpButton" Header="Регистрация" FontSize="24"  Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" Click="SignUpButton_Click" Grid.Column="4" HorizontalAlignment="Center"/>
                 </Menu>
                 <DataGrid Name="gamesGrid" AutoGenerateColumns="True" Grid.Row="1" Background="{x:Null}" Foreground="White" IsReadOnly="True">
                 </DataGrid>

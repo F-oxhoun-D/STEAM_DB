@@ -6,10 +6,7 @@
         xmlns:local="clr-namespace:STEAM_DB"
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-            Title="STEAM" Height="550" Width="1000" WindowStartupLocation="CenterScreen" Background="#FF14141F" BorderBrush="#FF14141F" Foreground="#FF14141F" WindowStyle="ThreeDBorderWindow" ResizeMode="CanMinimize" Icon="/steam_icon_188906.ico" Closing="Window_Closing">
-    <Window.Resources>
-
-    </Window.Resources>
+            Title="STEAM" Height="550" Width="1050" WindowStartupLocation="CenterScreen" Background="#FF14141F" BorderBrush="#FF14141F" Foreground="#FF14141F" WindowStyle="ThreeDBorderWindow" Icon="/steam_icon_188906.ico" Closing="Window_Closing" MinWidth="1050" MinHeight="550">
     <Grid Background="#FF1D1D2D">
         <Border>
             <Grid>
@@ -17,19 +14,35 @@
                     <RowDefinition Height="100"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <Border Grid.Row="0" Margin="0,0,620,0" Background="#FF14141F">
-                    <Grid>
-                        <Image Source="/steam_icon_188906.ico" Margin="0,16,250,22"/>
-                        <Label Name="userLabel" Content="STEAM" Foreground="White" FontSize="24" Margin="108,16,10,45"/>
-                    </Grid>
-                </Border>
-                <Menu Grid.Row="0" Background="#FF14141F" Height="100" Width="700" VerticalAlignment="Top" HorizontalAlignment="Right">
-                    <Button Name="gameButton" Style="{StaticResource MaterialDesignFlatLightBgButton}" Content="Игры" FontSize="24" Height="70" Width="182" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" Click="GameButton_Click"/>
-                    <Button Name="purchaseButton" Style="{StaticResource MaterialDesignFlatLightBgButton}" Content="Покупки" FontSize="24" Height="70" Width="167" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" VerticalAlignment="Top" Click="PurchaseButton_Click"/>
-                    <Button Name="wishlistButton" Style="{StaticResource MaterialDesignFlatLightBgButton}" Content="Избранное" FontSize="24" Height="70" Width="170" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" Click="WishlistButton_Click"/>
-                    <Button Name="logoutButton" Style="{StaticResource MaterialDesignFlatButton}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Width="51" Height="50" Click="LogoutButton_Click" >
-                        <Image Source="/_logout_.ico"></Image>
-                    </Button>
+                <Menu Grid.Row="0" Background="#FF14141F">
+                    <Menu.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.3*"/>
+                                    <ColumnDefinition Width="0.69*"/>
+                                    <ColumnDefinition Width="0.59*"/>
+                                    <ColumnDefinition Width="0.81*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="0.2*"/>
+                                </Grid.ColumnDefinitions>
+                            </Grid>
+                        </ItemsPanelTemplate>
+                    </Menu.ItemsPanel>
+                    <MenuItem Icon="" Foreground="White" Grid.Column="0" Margin="0,23,0,26" IsEnabled="False" Opacity="1">
+                        <MenuItem.Background>
+                            <ImageBrush ImageSource="/steam_icon_188906.ico" TileMode="Tile" Stretch="Uniform"/>
+                        </MenuItem.Background>
+                    </MenuItem>
+                    <MenuItem Grid.Column="1" Header="STEAM" IsEnabled="False" Foreground="White" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center" Opacity="1"/>
+                    <MenuItem Name="gameMenuItem" Header="Игры" FontSize="24"  Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" Click="GameButton_Click" Grid.Column="2" HorizontalAlignment="Center"/>
+                    <MenuItem Name="purchaseMenuItem" Header="Покупки" FontSize="24"  Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" Click="PurchaseButton_Click" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <MenuItem Name="wishlistMenuItem" Header="Избранное" FontSize="24"  Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" Click="WishlistButton_Click" Grid.Column="4" HorizontalAlignment="Center"/>
+                    <MenuItem Foreground="White" Grid.Column="5" Opacity="1" Click="LogoutButton_Click">
+                        <MenuItem.Background>
+                            <ImageBrush ImageSource="/_logout_.ico" TileMode="Tile" Stretch="Uniform"/>
+                        </MenuItem.Background>
+                    </MenuItem>
                 </Menu>
                 <Rectangle Grid.Row="1" Height="30" Fill="#FF655555" VerticalAlignment="Top"></Rectangle>
                 <Frame Grid.Row="1" Name="PersonalAccountFrame" NavigationUIVisibility="Hidden">

@@ -5,18 +5,40 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:STEAM_DB"
       mc:Ignorable="d" 
-      d:DesignHeight="450"
-      Title="PageGame" Width="1000" Height="434" ShowsNavigationUI="False">
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="PageGame" ShowsNavigationUI="False">
     <Page.Resources>
         <Style TargetType="DataGridColumnHeader">
             <Setter Property="Background" Value="#FF655555"/>
             <Setter Property="Height" Value="30"/>
         </Style>
     </Page.Resources>
-    <Grid Height="450">
-        <DataGrid x:Name="gamesGrid" AutoGenerateColumns="True" Grid.Row="1" Background="{x:Null}" Foreground="White" IsReadOnly="True" Height="300" VerticalAlignment="Top">
-        </DataGrid>
-        <Button x:Name="buttonBuyGame" Grid.Row="1" Content="Купить" Width="100" Height="40" Background="#FF14141F" BorderBrush="#FF4C4C72" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,150,70" Click="ButtonBuyGame_Click" />
-        <Button x:Name="buttonAddToWishlist" Grid.Row="1" Content="Добавить" Width="100" Height="40" VerticalAlignment="Bottom" Background="#FF14141F" BorderBrush="#FF4C4C72" HorizontalAlignment="Center" Margin="150,0,0,70" Click="ButtonAddToWishlist_Click" />
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <GridSplitter Grid.Column="1"  Grid.Row="0" ShowsPreview="False" Width="3"
+        HorizontalAlignment="Center" VerticalAlignment="Stretch" />
+        <GridSplitter Grid.Row="1" Grid.ColumnSpan="3" Height="3"
+        HorizontalAlignment="Stretch" VerticalAlignment="Center" />
+        <Canvas x:Name="CanvasGrid" Grid.ColumnSpan="3" Grid.Row="0">
+            <DataGrid Name="gamesGrid" AutoGenerateColumns="True" Background="{x:Null}" Foreground="White" IsReadOnly="True"
+                      Height="{Binding ElementName=CanvasGrid, Path=ActualHeight}"
+                      Width="{Binding ElementName=CanvasGrid, Path=ActualWidth}"/>
+        </Canvas>
+        <Canvas Name="CanvasButtonBuy" Grid.Column="0" Grid.Row="2">
+            <Button Canvas.Right="50" Name="buttonBuyGame" Grid.Row="1" Grid.Column="0" Content="Купить"  Background="#FF14141F" BorderBrush="#FF4C4C72" HorizontalAlignment="Center"  Click="ButtonBuyGame_Click" Width="100"
+                    />
+        </Canvas>
+        <Canvas Name="CanvasButtonAdd" Grid.Column="2" Grid.Row="3">
+            <Button Canvas.Left="50" Name="buttonAddToWishlist" Content="Добавить" Grid.Row="1" Grid.Column="2" Background="#FF14141F" BorderBrush="#FF4C4C72"  Click="ButtonAddToWishlist_Click" Width="100"/>
+        </Canvas>
     </Grid>
 </Page>
