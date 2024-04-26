@@ -5,19 +5,39 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:STEAM_DB"
       mc:Ignorable="d" 
-      d:DesignHeight="450"
-      Title="PageWishlist" Width="1000" Height="434" ShowsNavigationUI="False">
-    <Page.Resources>
-
-    </Page.Resources>
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="PageWishlist" ShowsNavigationUI="False">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
-            <RowDefinition/>
+            <RowDefinition Height="0.5*"></RowDefinition>
+            <RowDefinition Height="5*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-        <Rectangle Grid.Row="0" Fill="#FF655555"/>
-        <ListBox x:Name="listBoxWishlist" Grid.Row="1" FontSize="20" Foreground="White" Background="{x:Null}" Height="300" Width="800" VerticalAlignment="Top" HorizontalAlignment="Center" BorderBrush="#FF4C4C72"></ListBox>
-        <Button x:Name="buttonBuyGame" Grid.Row="1" Content="Купить" Width="100" Height="40" Background="#FF14141F" BorderBrush="#FF4C4C72" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,150,70" Click="ButtonBuyGame_Click" />
-        <Button x:Name="buttonRemoveGame" Grid.Row="1" Content="Удалить" Width="100" Height="40" VerticalAlignment="Bottom" Background="#FF14141F" BorderBrush="#FF4C4C72" HorizontalAlignment="Center" Margin="150,0,0,70" Click="ButtonRemoveGame_Click" />
+        <GridSplitter Grid.Column="1"  Grid.Row="0" ShowsPreview="False" Width="3"
+             HorizontalAlignment="Center" VerticalAlignment="Stretch" />
+        <GridSplitter Grid.Row="1" Grid.ColumnSpan="3" Height="3"
+             HorizontalAlignment="Stretch" VerticalAlignment="Center" />
+        <Canvas Name="CanvasRectangle" Grid.ColumnSpan="3" Grid.Row="0">
+            <Rectangle Fill="#FF655555"
+                       Height="{Binding ElementName=CanvasRectangle, Path=ActualHeight}"
+                       Width="{Binding ElementName=CanvasRectangle, Path=ActualWidth}"/>
+        </Canvas>
+        <Canvas Name="CanvasListBox" Grid.ColumnSpan="3" Grid.Row="1">
+            <ListBox x:Name="listBoxWishlist" FontSize="20" Foreground="White" Background="{x:Null}" VerticalAlignment="Top" HorizontalAlignment="Center" BorderBrush="#FF4C4C72"
+                     Height="{Binding ElementName=CanvasListBox, Path=ActualHeight}"
+                     Width="{Binding ElementName=CanvasListBox, Path=ActualWidth}"/>
+        </Canvas>
+        <Canvas Name="CanvasButtonBuy" Grid.Column="0" Grid.Row="3">
+            <Button Canvas.Right="50" x:Name="buttonBuyGame" Content="Купить" Width="100" Height="40" Background="#FF14141F" BorderBrush="#FF4C4C72" HorizontalAlignment="Center" VerticalAlignment="Bottom" Click="ButtonBuyGame_Click" />
+        </Canvas>
+        <Canvas Name="CanvasButtonRemove" Grid.Column="2" Grid.Row="3">
+            <Button Canvas.Left="50" x:Name="buttonRemoveGame" Content="Удалить" Width="100" Height="40" VerticalAlignment="Bottom" Background="#FF14141F" BorderBrush="#FF4C4C72" HorizontalAlignment="Center" Click="ButtonRemoveGame_Click" />
+        </Canvas>
     </Grid>
 </Page>
