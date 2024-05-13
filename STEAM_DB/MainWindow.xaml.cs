@@ -10,7 +10,6 @@ namespace STEAM_DB
         public MainWindow()
         {
             InitializeComponent();
-            _ = ConnectionToDataBase.Connection;
         }
 
         private void GameButton_Click(object sender, RoutedEventArgs e)
@@ -18,8 +17,7 @@ namespace STEAM_DB
             // делаем кнопку неактивной
             gameButton.IsEnabled = false;
             // в gamesGrid выводим список игр
-            gamesGrid.ItemsSource = ProcessRequest.GetListOfGames();
-
+            gamesGrid.ItemsSource = DBHelper.GetListOfGames();
         }
 
         private void SignUpButton_Click(object sender, RoutedEventArgs e)
@@ -32,6 +30,11 @@ namespace STEAM_DB
         {
             SignInWindow signInWindow = new();
             signInWindow.ShowDialog();
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            PostgreSqlConnection.Context.Dispose();
         }
     }
 }

@@ -16,7 +16,7 @@ namespace STEAM_DB
 
         private void Load()
         {
-            List<string> list = ProcessRequest.GetListOfWishlist(Global.user.UserId);
+            List<string> list = DBHelper.GetListOfWishlist(Global.user.UserId);
             foreach (var m in list)
                 listBoxWishlist.Items.Add(m);
         }
@@ -30,10 +30,10 @@ namespace STEAM_DB
                 if (gameName != null)
                 {
                     int gameId = -1;
-                    bool check = ProcessRequest.CheckThePurchase(gameName, ref gameId);
+                    bool check = DBHelper.CheckThePurchase(gameName, ref gameId);
                     if (!check)
                     {
-                        ProcessRequest.BuyGame(gameId);
+                        DBHelper.BuyGame(gameId);
                         MessageBox.Show("Поздравляем с покупкой");
 
                         PersonalAccountWindow.listPage[PersonalAccountWindow.indxPurchase] = new PagePurchase();
@@ -55,7 +55,7 @@ namespace STEAM_DB
                 if (gameName != null)
                 {
                     int gameId = -1;
-                    ProcessRequest.RemoveFromWishlist(gameName, ref gameId);
+                    DBHelper.RemoveFromWishlist(gameName, ref gameId);
 
                     PersonalAccountWindow.listPage[PersonalAccountWindow.indxWishlist] = new PageWishlist();
                     listBoxWishlist.Items.Clear();

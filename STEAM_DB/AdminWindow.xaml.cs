@@ -16,9 +16,11 @@ namespace STEAM_DB
         {
             string sql = textBoxSQLQuery.Text;
 
+            if (sql == string.Empty) return;
+
             try // в данном блоке выполняется какая-либо инструкция(метод)
             {
-                queryGrid.ItemsSource = ProcessRequest.SQLQuery(sql);
+                queryGrid.ItemsSource = DBHelper.SQLQuery(sql);
             }
             catch (Exception ex) // если в блоке try возникает ошибка или исключение, то программа ищет блок catch
             {   // набор инструкций при ошибке

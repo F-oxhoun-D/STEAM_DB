@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:STEAM_DB"
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="STEAM" Height="550" Width="1050" WindowStartupLocation="CenterScreen" Background="#FF14141F" BorderBrush="#FF14141F" Foreground="#FF14141F" WindowStyle="ThreeDBorderWindow" Icon="/steam_icon_188906.ico" MinWidth="1050" MinHeight="550">
+        Title="STEAM" Height="550" Width="1050" WindowStartupLocation="CenterScreen" Background="#FF14141F" BorderBrush="#FF14141F" Foreground="#FF14141F" WindowStyle="ThreeDBorderWindow" Icon="/steam_icon_188906.ico" MinWidth="1050" MinHeight="550" Closing="Window_Closing">
     <Window.Resources>
         <Style TargetType="DataGridColumnHeader">
             <Setter Property="Background" Value="#FF655555"/>

@@ -1,39 +1,47 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Npgsql;
 using System.IO;
+using System.Windows.Navigation;
 
 namespace STEAM_DB
 {
     // применение шаблона Singleton
     // ключевое слово sealed - запечатанный класс (нельзя наследовать)
-    sealed class ConnectionToDataBase
-    {
+    sealed class PostgreSqlConnection
+    { 
+        // экземпляр класса
+        private static NpgsqlConnection? connection;
+
+        private static SteamContext? context;
+
         public static string ConnectionString { get; set; } = null!;
 
         public static DbContextOptions<SteamContext> ConnectionStringOptions { get; set; } = null!;
 
-        // экземпляр класса
-        private static ConnectionToDataBase? connection;
+        static PostgreSqlConnection() => Connect();
 
-        // свойство
-        public static ConnectionToDataBase Connection
-        {
-            // получаем значение
+        public static NpgsqlConnection Connection 
+        { 
             get
             {
-                // если экземпляр равен null, создаём новый объект
-                connection ??= new ConnectionToDataBase();
-                // иначе возвращаем уже созданный
+                connection ??= CreateConnection();
                 return connection;
-                // это средство доступа - единственный способ получить доступ к Singleton экземпляру
-                // защита от созданий множества экземпляров класса ConnectionToDataBase
             }
         }
 
-        private ConnectionToDataBase()
+        public static SteamContext Context
         {
-            Connect();
+            get
+            {
+                context ??= CreateContext();
+                return context;
+            }
         }
+
+        private static NpgsqlConnection CreateConnection() => new(ConnectionString);
+
+        private static SteamContext CreateContext() => new(ConnectionStringOptions);
 
         private static void Connect()
         {

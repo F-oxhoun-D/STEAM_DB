@@ -16,7 +16,7 @@ namespace STEAM_DB
 
         private void Load()
         {
-            purchasesGrid.ItemsSource = ProcessRequest.GetListOfPurchases(Global.user.UserId);
+            purchasesGrid.ItemsSource = DBHelper.GetListOfPurchases(Global.user.UserId);
         }
 
         private void ButtonReturnTheGame_Click(object sender, RoutedEventArgs e)
@@ -31,10 +31,10 @@ namespace STEAM_DB
                 string gameName = content.Text;
 
                 int gameId = -1;
-                bool check = ProcessRequest.CheckToReturnTheGame(gameName, ref gameId);
+                bool check = DBHelper.CheckToReturnTheGame(gameName, ref gameId);
                 if (check)
                 {
-                    ProcessRequest.ReturnGame(gameId);
+                    DBHelper.ReturnGame(gameId);
                     MessageBox.Show("Игра успешно возвращена");
 
                     PersonalAccountWindow.listPage[PersonalAccountWindow.indxPurchase] = new PagePurchase();

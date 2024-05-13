@@ -11,7 +11,7 @@ namespace STEAM_DB
         public PageGame()
         {
             InitializeComponent();
-            gamesGrid.ItemsSource = ProcessRequest.GetListOfGames();
+            gamesGrid.ItemsSource = DBHelper.GetListOfGames();
         }
 
         private void ButtonBuyGame_Click(object sender, RoutedEventArgs e)
@@ -27,10 +27,10 @@ namespace STEAM_DB
                 string gameName = content.Text;
 
                 int gameId = -1;
-                bool check = ProcessRequest.CheckThePurchase(gameName, ref gameId);
+                bool check = DBHelper.CheckThePurchase(gameName, ref gameId);
                 if (!check)
                 {
-                    ProcessRequest.BuyGame(gameId);
+                    DBHelper.BuyGame(gameId);
                     MessageBox.Show("Поздравляем с покупкой");
 
                     PersonalAccountWindow.listPage[PersonalAccountWindow.indxPurchase] = new PagePurchase();
@@ -55,10 +55,10 @@ namespace STEAM_DB
                 string gameName = content.Text;
 
                 int gameId = -1;
-                bool check = ProcessRequest.CheckTheWishlist(gameName, ref gameId);
+                bool check = DBHelper.CheckTheWishlist(gameName, ref gameId);
                 if (!check)
                 {
-                    ProcessRequest.AddToWishlist(gameId);
+                    DBHelper.AddToWishlist(gameId);
                     MessageBox.Show("Игра добавлена в избранное");
 
                     PersonalAccountWindow.listPage[PersonalAccountWindow.indxWishlist] = new PageWishlist();
